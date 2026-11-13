@@ -27,7 +27,7 @@
             color: var(--text-color);
             margin: 0; padding: 0;
             display: flex; flex-direction: column; align-items: center;
-            height: 100vh; overflow: hidden;
+            height: 100vh; height: 100dvh; overflow: hidden;
         }
 
         .app-container {
@@ -37,9 +37,11 @@
             height: 100%;
         }
 
-        header { margin-bottom: 12px; }
-        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        header { margin-bottom: 12px; flex-shrink: 0; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; }
         h1 { font-size: 1.2rem; margin: 0; color: var(--primary-color); }
+
+        .header-actions { display: flex; align-items: center; gap: 8px; }
 
         .btn-import {
             background: var(--card-bg); border: 1px solid #ddd;
@@ -48,6 +50,16 @@
             cursor: pointer; transition: all 0.2s;
         }
         .btn-import:hover { color: var(--primary-color); border-color: var(--primary-color); }
+
+        .btn-submit-top {
+            background: var(--primary-color); border: none;
+            color: white; padding: 6px 14px;
+            border-radius: 20px; font-size: 0.8rem; font-weight: 700;
+            cursor: pointer; transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(0, 161, 224, 0.25);
+            display: none;
+        }
+        .btn-submit-top:hover { background: var(--primary-dark); }
 
         /* 모드 전환 토글 */
         .mode-toggle {
@@ -68,7 +80,7 @@
         #mode-study:checked ~ .toggle-bg { transform: translateX(0); }
         #mode-test:checked ~ .toggle-bg { transform: translateX(100%); }
 
-        /* 서브 옵션 바 (학습모드 별표필터 / 테스트모드 오답반복 토글) */
+        /* 서브 옵션 바 */
         .sub-toolbar {
             display: flex; justify-content: space-between; align-items: center;
             background: #ffffff; padding: 8px 14px; border-radius: 12px;
@@ -103,13 +115,13 @@
 
         /* 공통 영역 */
         .main-area {
-            flex: 1; position: relative; margin-bottom: 12px;
+            flex: 1; position: relative;
             min-height: 0; display: flex; flex-direction: column;
         }
 
         .tag-row {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 14px;
+            margin-bottom: 14px; flex-shrink: 0;
         }
         .tag-group { display: flex; align-items: center; gap: 6px; }
         .tag {
@@ -132,11 +144,12 @@
         }
 
         /* =========================================
-           1. 학습 모드 (3D 플래시카드 뒤집기)
+           1. 학습 모드 (3D 플래시카드 뒤집기 & 내부 스크롤)
            ========================================= */
         .study-wrapper {
-            width: 100%; height: 100%;
+            width: 100%; flex: 1; min-height: 0;
             perspective: 1000px; cursor: pointer;
+            margin-bottom: 12px;
         }
         .card-inner {
             position: relative; width: 100%; height: 100%;
@@ -145,21 +158,32 @@
         }
         .card-inner.flipped { transform: rotateY(180deg); }
 
+        /* 앞/뒷면 전환 시 비활성 면의 pointer-events와 visibility를 제어하여 모바일/PC 내부 스크롤 보장 */
         .card-front, .card-back {
-            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            backface-visibility: hidden; -webkit-backface-visibility: hidden;
             background: var(--card-bg); border-radius: var(--border-radius);
             box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 20px; box-sizing: border-box;
-            overflow-y: auto; display: flex; flex-direction: column; border: 1px solid #eaeaea;
+            overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y;
+            display: flex; flex-direction: column; border: 1px solid #eaeaea;
+            pointer-events: auto;
         }
         .card-back {
             transform: rotateY(180deg); background: #f8fbff; border: 2px solid var(--primary-color);
+            pointer-events: none;
+        }
+        .card-inner.flipped .card-front {
+            pointer-events: none;
+        }
+        .card-inner.flipped .card-back {
+            pointer-events: auto;
         }
 
         .study-question {
             font-size: 1.05rem; line-height: 1.65; font-weight: 600;
             margin-bottom: 20px; color: var(--text-color);
         }
-        .study-options { display: flex; flex-direction: column; gap: 12px; }
+        .study-options { display: flex; flex-direction: column; gap: 12px; padding-bottom: 12px; }
         .study-option-item {
             background: #f8f9fa; padding: 12px 14px; border-radius: 10px;
             font-size: 0.96rem; line-height: 1.5; border: 1px solid #ececec;
@@ -172,16 +196,23 @@
         }
         .explanation-text {
             font-size: 0.96rem; line-height: 1.65; color: var(--text-light); white-space: pre-wrap;
+            padding-bottom: 12px;
         }
 
         /* =========================================
-           2. 테스트 모드 (객관식 & 오답 반복 모드)
+           2. 테스트 모드 (카드 박스 최하단 이전/다음 배치)
            ========================================= */
         .test-wrapper {
             width: 100%; height: 100%;
             background: var(--card-bg); border-radius: var(--border-radius);
             box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 20px; box-sizing: border-box;
-            overflow-y: auto; display: none; flex-direction: column; border: 1px solid #eaeaea;
+            display: none; flex-direction: column; border: 1px solid #eaeaea;
+            overflow: hidden;
+        }
+
+        .test-scroll-content {
+            flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+            padding-right: 2px;
         }
 
         .test-question {
@@ -224,13 +255,13 @@
             display: block; background: var(--error-bg); color: #b71c1c; border: 1px solid #ffcdd2;
         }
 
-        .btn-submit-exam {
-            margin-top: auto; width: 100%; padding: 14px;
-            background: var(--primary-color); color: white; border: none;
-            border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 161, 224, 0.25);
+        /* 카드 박스 최하단 네비게이션 바 */
+        .card-bottom-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 14px; margin-top: 8px;
+            border-top: 1px solid #f0f0f0;
+            flex-shrink: 0;
         }
-        .btn-submit-exam:hover { background: var(--primary-dark); }
 
         /* 완료/결과 화면 */
         .result-wrapper, .complete-box {
@@ -271,17 +302,23 @@
             border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
         }
 
-        /* 하단 컨트롤 */
-        .controls { display: flex; justify-content: space-between; align-items: center; padding: 4px 0 10px 0; }
+        /* 공통 버튼/진행률 스타일 */
+        .study-controls {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 4px 0 6px 0; flex-shrink: 0;
+        }
         .btn {
             background: var(--card-bg); border: 1px solid #ddd; color: var(--text-color);
-            padding: 11px 18px; border-radius: 30px; font-size: 0.92rem; font-weight: 600;
+            padding: 10px 18px; border-radius: 30px; font-size: 0.9rem; font-weight: 600;
             cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.05); touch-action: manipulation;
+        }
+        .btn-nav-primary {
+            background: var(--primary-light); border-color: #bce0fd; color: var(--primary-dark);
         }
         .btn:active { transform: scale(0.96); background: #f0f0f0; }
         .btn:disabled { opacity: 0.4; cursor: not-allowed; }
         .progress { font-size: 0.95rem; font-weight: 700; color: var(--primary-color); text-align: center; }
-        .sub-progress { font-size: 0.76rem; color: var(--text-light); font-weight: 500; display: block; margin-top: 2px; }
+        .sub-progress { font-size: 0.75rem; color: var(--text-light); font-weight: 500; display: block; margin-top: 2px; }
 
         /* 모달 */
         .modal-overlay {
@@ -310,7 +347,10 @@
     <header>
         <div class="header-top">
             <h1>MC-Con-201</h1>
-            <button class="btn-import" onclick="openModal()">데이터 불러오기</button>
+            <div class="header-actions">
+                <button class="btn-submit-top" id="btn-submit-top" onclick="submitExam()">시험 제출 및 채점하기</button>
+                <button class="btn-import" onclick="openModal()">데이터 불러오기</button>
+            </div>
         </div>
         <div class="mode-toggle">
             <input type="radio" name="mode" id="mode-study" value="study" checked onchange="changeMode()">
@@ -339,10 +379,10 @@
     </header>
 
     <div class="main-area" id="swipe-area">
-        <!-- 1. 학습 모드 (3D 카드 뒤집기 + 별표) -->
+        <!-- 1. 학습 모드 (3D 카드 뒤집기 + 내부 스크롤) -->
         <div id="study-wrapper" class="study-wrapper" onclick="flipCard()">
             <div class="card-inner" id="card-inner">
-                <div class="card-front">
+                <div class="card-front" id="study-card-front">
                     <div class="tag-row">
                         <span class="tag" id="study-q-num">대기 중</span>
                         <button class="btn-star" id="btn-study-star" onclick="toggleStar(event)">
@@ -352,7 +392,7 @@
                     <div class="study-question" id="study-q-text">데이터를 불러오는 중입니다...</div>
                     <div class="study-options" id="study-options-box"></div>
                 </div>
-                <div class="card-back">
+                <div class="card-back" id="study-card-back">
                     <div class="tag-row">
                         <span class="tag">정답 및 해설</span>
                         <button class="btn-star" id="btn-study-star-back" onclick="toggleStar(event)">
@@ -365,7 +405,17 @@
             </div>
         </div>
 
-        <!-- 2. 테스트 모드 (모의고사 / 오답 무한반복 겸용) -->
+        <!-- 학습 모드 하단 네비게이션 -->
+        <div class="study-controls" id="study-controls">
+            <button class="btn" id="btn-study-prev" onclick="prevCard()">◀ 이전</button>
+            <div class="progress">
+                <span id="study-progress-text">0 / 0</span>
+                <span class="sub-progress" id="study-sub-progress"></span>
+            </div>
+            <button class="btn" id="btn-study-next" onclick="nextCard()">다음 ▶</button>
+        </div>
+
+        <!-- 2. 테스트 모드 (카드 박스 최하단에 이전/다음 버튼 배치) -->
         <div id="test-wrapper" class="test-wrapper">
             <div id="test-active-box" style="display:flex; flex-direction:column; height:100%;">
                 <div class="tag-row">
@@ -377,10 +427,22 @@
                         <span class="star-icon">☆</span> 별표
                     </button>
                 </div>
-                <div class="test-question" id="test-q-text"></div>
-                <div class="test-options" id="test-options-box"></div>
-                <div class="instant-feedback" id="instant-feedback"></div>
-                <button class="btn-submit-exam" id="btn-submit-exam" onclick="submitExam()">시험 제출 및 채점하기</button>
+
+                <div class="test-scroll-content" id="test-scroll-content">
+                    <div class="test-question" id="test-q-text"></div>
+                    <div class="test-options" id="test-options-box"></div>
+                    <div class="instant-feedback" id="instant-feedback"></div>
+                </div>
+
+                <!-- 카드 박스 최하단 이전/다음 버튼 -->
+                <div class="card-bottom-nav">
+                    <button class="btn" id="btn-test-prev" onclick="prevCard()">◀ 이전</button>
+                    <div class="progress">
+                        <span id="test-progress-text">0 / 0</span>
+                        <span class="sub-progress" id="test-sub-progress"></span>
+                    </div>
+                    <button class="btn btn-nav-primary" id="btn-test-next" onclick="nextCard()">다음 ▶</button>
+                </div>
             </div>
 
             <!-- 일반 모의고사 채점 결과 화면 -->
@@ -406,15 +468,6 @@
             </div>
         </div>
     </div>
-    
-    <div class="controls" id="bottom-controls">
-        <button class="btn" id="btn-prev" onclick="prevCard()">◀ 이전</button>
-        <div class="progress">
-            <span id="progress-text">0 / 0</span>
-            <span class="sub-progress" id="sub-progress-text"></span>
-        </div>
-        <button class="btn" id="btn-next" onclick="nextCard()">다음 ▶</button>
-    </div>
 
     <!-- 데이터 Import 모달 -->
     <div class="modal-overlay" id="import-modal">
@@ -434,7 +487,7 @@
 <script>
     let allCards = [];
     let currentMode = 'study'; // 'study' or 'test'
-    let starredSet = new Set(); // 전체 모드 공유 별표(qNum) 집합
+    let starredSet = new Set();
 
     // 1. 학습 모드 상태
     let studyList = [];
@@ -442,12 +495,12 @@
     let isFlipped = false;
     let isStudyStarFilter = false;
 
-    // 2. 테스트 모드 상태 (A: 일반 모의고사 / B: 오답 반복 모드)
+    // 2. 테스트 모드 상태
     let isRepeatUntilCorrect = false;
     
     // 2-A. 일반 모의고사 상태
     let examIndex = 0;
-    let examAnswers = {}; // { qNum: 'A' }
+    let examAnswers = {};
     let isExamSubmitted = false;
     let currentResultFilter = 'all';
 
@@ -458,15 +511,12 @@
 
     // DOM 요소
     const studyWrapper = document.getElementById('study-wrapper');
+    const studyControls = document.getElementById('study-controls');
     const testWrapper = document.getElementById('test-wrapper');
     const studyToolbar = document.getElementById('study-toolbar');
     const testToolbar = document.getElementById('test-toolbar');
     const cardInner = document.getElementById('card-inner');
-    const bottomControls = document.getElementById('bottom-controls');
-    const btnPrev = document.getElementById('btn-prev');
-    const btnNext = document.getElementById('btn-next');
-    const progressText = document.getElementById('progress-text');
-    const subProgressText = document.getElementById('sub-progress-text');
+    const btnSubmitTop = document.getElementById('btn-submit-top');
 
     function splitQuestionAndOptions(frontText) {
         const lines = frontText.split('\n');
@@ -515,27 +565,38 @@
         renderCurrentView();
     }
 
+    function updateTopSubmitButton() {
+        if (currentMode === 'test' && !isRepeatUntilCorrect && !isExamSubmitted && allCards.length > 0) {
+            btnSubmitTop.style.display = 'inline-block';
+        } else {
+            btnSubmitTop.style.display = 'none';
+        }
+    }
+
     function changeMode() {
         currentMode = document.getElementById('mode-study').checked ? 'study' : 'test';
         if (currentMode === 'study') {
             studyWrapper.style.display = 'block';
+            studyControls.style.display = 'flex';
             testWrapper.style.display = 'none';
             studyToolbar.style.display = 'flex';
             testToolbar.style.display = 'none';
-            bottomControls.style.display = 'flex';
             isFlipped = false;
             cardInner.classList.remove('flipped');
         } else {
             studyWrapper.style.display = 'none';
+            studyControls.style.display = 'none';
             testWrapper.style.display = 'flex';
             studyToolbar.style.display = 'none';
             testToolbar.style.display = 'flex';
         }
+        updateTopSubmitButton();
         renderCurrentView();
     }
 
     function renderCurrentView() {
         if (allCards.length === 0) return;
+        updateTopSubmitButton();
         if (currentMode === 'study') {
             renderStudyCard();
         } else {
@@ -576,20 +637,20 @@
         }
         updateStarBadgeCount();
 
-        // 학습모드에서 '별표만 모아보기' 중인데 별표를 해제한 경우 목록 갱신
         if (currentMode === 'study' && isStudyStarFilter) {
             applyStudyFilter();
         } else {
             syncStarButtonsUI(qNum);
             if (currentMode === 'test' && !isRepeatUntilCorrect && !isExamSubmitted) {
                 const answeredCount = Object.keys(examAnswers).length;
-                subProgressText.textContent = `풀이 완료: ${answeredCount}문항 | ★ 별표: ${starredSet.size}개`;
+                document.getElementById('test-sub-progress').textContent = `풀이 완료: ${answeredCount}문항 | ★ 별표: ${starredSet.size}개`;
             }
         }
     }
 
     function updateStarBadgeCount() {
-        document.getElementById('star-count-badge').textContent = starredSet.size;
+        const badge = document.getElementById('star-count-badge');
+        if (badge) badge.textContent = starredSet.size;
     }
 
     function syncStarButtonsUI(qNum) {
@@ -613,7 +674,7 @@
     }
 
     /* =========================================
-       1. 학습 모드 (3D 뒤집기 + 별표 모아보기)
+       1. 학습 모드 (3D 뒤집기 + 내부 스크롤)
        ========================================= */
     function toggleStudyStarFilter() {
         isStudyStarFilter = !isStudyStarFilter;
@@ -640,16 +701,21 @@
 
     function renderStudyCard() {
         const optionsBox = document.getElementById('study-options-box');
+        const prevBtn = document.getElementById('btn-study-prev');
+        const nextBtn = document.getElementById('btn-study-next');
+        const progText = document.getElementById('study-progress-text');
+        const subProg = document.getElementById('study-sub-progress');
+
         if (studyList.length === 0) {
             document.getElementById('study-q-num').textContent = "알림";
             document.getElementById('study-q-text').textContent = "별표 표시한 문제가 없습니다. 전체 보기 상태에서 중요한 문제에 별표를 눌러보세요.";
             optionsBox.innerHTML = '';
             document.getElementById('study-answer').textContent = "";
             document.getElementById('study-explanation').textContent = "";
-            progressText.textContent = `0 / 0`;
-            subProgressText.textContent = '';
-            btnPrev.disabled = true;
-            btnNext.disabled = true;
+            progText.textContent = `0 / 0`;
+            subProg.textContent = '';
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
             isFlipped = false;
             cardInner.classList.remove('flipped');
             return;
@@ -674,16 +740,16 @@
         document.getElementById('study-answer').textContent = card.answer;
         document.getElementById('study-explanation').textContent = card.explanation;
 
-        progressText.textContent = `${studyIndex + 1} / ${studyList.length}`;
-        subProgressText.textContent = isStudyStarFilter ? '★ 별표 집중 학습 중' : '';
+        progText.textContent = `${studyIndex + 1} / ${studyList.length}`;
+        subProg.textContent = isStudyStarFilter ? '★ 별표 집중 학습 중' : '';
 
-        btnPrev.disabled = studyIndex === 0;
-        btnNext.disabled = studyIndex === studyList.length - 1;
+        prevBtn.disabled = studyIndex === 0;
+        nextBtn.disabled = studyIndex === studyList.length - 1;
 
         isFlipped = false;
         cardInner.classList.remove('flipped');
-        document.querySelector('.card-front').scrollTop = 0;
-        document.querySelector('.card-back').scrollTop = 0;
+        document.getElementById('study-card-front').scrollTop = 0;
+        document.getElementById('study-card-back').scrollTop = 0;
     }
 
     function flipCard() {
@@ -711,6 +777,7 @@
         examAnswers = {};
         isExamSubmitted = false;
         currentResultFilter = 'all';
+        updateTopSubmitButton();
         if (shouldRender && currentMode === 'test' && !isRepeatUntilCorrect) renderExamCard();
     }
 
@@ -719,9 +786,8 @@
         document.getElementById('result-wrapper').style.display = 'none';
         document.getElementById('repeat-complete-box').style.display = 'none';
         document.getElementById('instant-feedback').style.display = 'none';
-        document.getElementById('btn-submit-exam').style.display = 'block';
         document.getElementById('test-retry-badge').style.display = 'none';
-        bottomControls.style.display = 'flex';
+        updateTopSubmitButton();
 
         const card = allCards[examIndex];
         const qNum = card.qNum || (examIndex + 1);
@@ -749,16 +815,17 @@
         });
 
         const answeredCount = Object.keys(examAnswers).length;
-        progressText.textContent = `${examIndex + 1} / ${allCards.length}`;
-        subProgressText.textContent = `풀이 완료: ${answeredCount}문항 | ★ 별표: ${starredSet.size}개`;
+        document.getElementById('test-progress-text').textContent = `${examIndex + 1} / ${allCards.length}`;
+        document.getElementById('test-sub-progress').textContent = `풀이 완료: ${answeredCount}문항 | ★ 별표: ${starredSet.size}개`;
 
-        btnPrev.disabled = examIndex === 0;
-        btnNext.disabled = examIndex === allCards.length - 1;
-        testWrapper.scrollTop = 0;
+        document.getElementById('btn-test-prev').disabled = examIndex === 0;
+        document.getElementById('btn-test-next').disabled = examIndex === allCards.length - 1;
+        document.getElementById('test-scroll-content').scrollTop = 0;
     }
 
     function submitExam() {
         isExamSubmitted = true;
+        updateTopSubmitButton();
         renderResultScreen();
     }
 
@@ -766,7 +833,7 @@
         document.getElementById('test-active-box').style.display = 'none';
         document.getElementById('repeat-complete-box').style.display = 'none';
         document.getElementById('result-wrapper').style.display = 'flex';
-        bottomControls.style.display = 'none';
+        updateTopSubmitButton();
 
         let correctCount = 0;
         allCards.forEach((card, idx) => {
@@ -842,18 +909,16 @@
 
     function renderRepeatCard() {
         document.getElementById('result-wrapper').style.display = 'none';
-        document.getElementById('btn-submit-exam').style.display = 'none';
+        updateTopSubmitButton();
 
         if (masteredCount >= allCards.length) {
             document.getElementById('test-active-box').style.display = 'none';
             document.getElementById('repeat-complete-box').style.display = 'flex';
-            bottomControls.style.display = 'none';
             return;
         }
 
         document.getElementById('test-active-box').style.display = 'flex';
         document.getElementById('repeat-complete-box').style.display = 'none';
-        bottomControls.style.display = 'flex';
 
         const item = repeatQueue[repeatIndex];
         const parsed = splitQuestionAndOptions(item.front);
@@ -898,12 +963,12 @@
             }
         }
 
-        progressText.textContent = `${repeatIndex + 1} / ${repeatQueue.length}`;
-        subProgressText.textContent = `완벽 숙지: ${masteredCount} / ${allCards.length}문제`;
+        document.getElementById('test-progress-text').textContent = `${repeatIndex + 1} / ${repeatQueue.length}`;
+        document.getElementById('test-sub-progress').textContent = `완벽 숙지: ${masteredCount} / ${allCards.length}문제`;
 
-        btnPrev.disabled = repeatIndex === 0;
-        btnNext.disabled = repeatIndex === repeatQueue.length - 1;
-        testWrapper.scrollTop = 0;
+        document.getElementById('btn-test-prev').disabled = repeatIndex === 0;
+        document.getElementById('btn-test-next').disabled = repeatIndex === repeatQueue.length - 1;
+        document.getElementById('test-scroll-content').scrollTop = 0;
     }
 
     function handleRepeatAnswer(selectedLetter, correctLetter) {
@@ -929,7 +994,7 @@
     }
 
     /* =========================================
-       네비게이션 (학습모드만 스와이프 허용 / 테스트모드는 버튼 전용)
+       네비게이션 (학습모드 스와이프 / 테스트모드 버튼 전용)
        ========================================= */
     function nextCard() {
         if (currentMode === 'study') {
@@ -969,20 +1034,23 @@
         }
     }
 
-    // 스와이프는 '학습 모드'에서만 동작 (테스트 모드에서는 버튼으로만 이동)
-    const swipeArea = document.getElementById('swipe-area');
-    let touchstartX = 0; let touchendX = 0;
-    swipeArea.addEventListener('touchstart', e => {
+    // 스와이프는 '학습 모드'에서만 동작하며, 상하 스크롤과 충돌하지 않도록 수평 이동량이 수직 이동량보다 클 때만 작동
+    let touchstartX = 0; let touchstartY = 0;
+    studyWrapper.addEventListener('touchstart', e => {
         if (currentMode !== 'study') return;
         touchstartX = e.changedTouches[0].screenX;
+        touchstartY = e.changedTouches[0].screenY;
     }, {passive: true});
     
-    swipeArea.addEventListener('touchend', e => {
+    studyWrapper.addEventListener('touchend', e => {
         if (currentMode !== 'study') return;
-        touchendX = e.changedTouches[0].screenX;
-        const threshold = 60;
-        if (touchendX < touchstartX - threshold) nextCard();
-        if (touchendX > touchstartX + threshold) prevCard();
+        const diffX = e.changedTouches[0].screenX - touchstartX;
+        const diffY = e.changedTouches[0].screenY - touchstartY;
+        // 수평 스와이프 거리가 60px 이상이고, 수직 스크롤 거리보다 명확히 클 때만 카드 이동
+        if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+            if (diffX < 0) nextCard();
+            else prevCard();
+        }
     }, {passive: true});
 
     document.addEventListener('keydown', (e) => {
