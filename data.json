@@ -1,0 +1,638 @@
+[
+  {
+    "qNum": 1,
+    "front": "A Marketing Cloud Next Consultant uses the Campaign Creation Agent to generate a campaign brief, flow, and email assets from a single prompt. They now need a matching audience segment without rewriting the audience description. How should the consultant generate the segment so it reflects the campaign brief?\nA. Create a new segment, choose Segment Creation, and describe the Segment.\nB. Ask the Campaign Creation Agent in the Agentforce chat to build the segment during campaign creation.\nC. Open the segment builder from the Campaign, choose Segment Creation, and review the generated Segment draft.",
+    "answer": "정답: C. Open the segment builder from the Campaign, choose Segment Creation, and review the generated Segment draft.",
+    "explanation": "Campaign Creation Agent가 세그먼트 초안을 자동 생성하므로, Segment Creation에서 이를 검토하고 다듬기만 하면 됩니다."
+  },
+  {
+    "qNum": 2,
+    "front": "A Marketing Cloud Next Consultant wants to use marketing agents to automate the generation of a new campaign, draft email content, and build an audience segment in the company's account. What is the best workflow for the consultant to use?\nA. Use the Campaign Creation Agent to generate the campaign record, content, and audience criteria, and then use audience criteria in Segment Creation to build the segment.\nB. Use a custom agent configured with custom Prompt Builder and Data 360 actions to generate the campaign record, build the segment, and draft the content using a single prompt.\nC. Use the Campaign Agent to natively build the segment, draft the content, and generate the campaign record using a single prompt.",
+    "answer": "정답: A. Use the Campaign Creation Agent to generate the campaign record, content, and audience criteria, and then use audience criteria in Segment Creation to build the segment.",
+    "explanation": "Campaign Creation Agent로 캠페인과 기준을 먼저 생성한 후, 전문화된 Segment Creation 기능을 통해 실제 세그먼트를 구축하는 것이 표준입니다."
+  },
+  {
+    "qNum": 3,
+    "front": "Northern Trail Outfitters operates with a central corporate marketing team and regional marketing teams in multiple Business Units. The corporate team creates approved email templates in a central enhanced CMS workspace. The regional teams report that they cannot access these corporate templates for their campaigns. They can only see content created within their own Business Unit's workspace. What is the cause of this issue?\nA. The regional users must be added as contributors to the enhanced CMS workspace.\nB. The content in an enhanced CMS workspace is related to its Business Unit by default.\nC. The corporate templates have not been published to the enhanced CMS workspace.",
+    "answer": "정답: B. The content in an enhanced CMS workspace is related to its Business Unit by default.",
+    "explanation": "CMS 작업 공간의 콘텐츠는 기본적으로 해당 비즈니스 유닛(BU)에 귀속되어 격리되므로, 공유를 위해서는 Common Assets 라이브러리를 사용해야 합니다."
+  },
+  {
+    "qNum": 4,
+    "front": "A financial services company is launching a Conversational Email campaign. The goal is to give customers the ability to reply directly to outbound promotional emails to initiate a real-time interaction with an AI agent. The Marketing Cloud Next Consultant has already built the required flow to handle the inbound routing. What is the required configuration step to ensure customer replies are successfully captured for response handling?\nA. Configure Reply Mail Management (RMM) and set it to forward inbound replies to the AI agent's queue.\nB. Configure the sending From Address's Agent Conversational Messaging and set the Routing Type to send inbound replies.\nC. Configure the Route Work activity to successfully connect to the next flow to generate an email response.",
+    "answer": "정답: B. Configure the sending From Address's Agent Conversational Messaging and set the Routing Type to send inbound replies.",
+    "explanation": "Conversational Email을 캡처하려면 발신 주소(From Address)에 'Agent Conversational Messaging'을 구성하고 라우팅 유형을 지정해야 합니다."
+  },
+  {
+    "qNum": 5,
+    "front": "Northern Trail Outfitters (NTO) uses a calculated insight in Data 360 to evaluate a 'Churn Risk' status. NTO's Marketing Cloud Next Consultant must automate a re-engagement email to send within 24 hours of when a customer becomes high risk. Which flow type and configuration should the consultant use?\nA. Build a segment using the calculated insight as a criteria and configure an audience flow to send the email.\nB. Build a Data 360-triggered flow on the Calculated Insights Object with the entry condition set to trigger when the status changes.\nC. Build a record-triggered flow on the Calculated Insights Object with a changed status entry condition to send the email.",
+    "answer": "정답: B. Build a Data 360-triggered flow on the Calculated Insights Object with the entry condition set to trigger when the status changes.",
+    "explanation": "이탈 위험 상태 변화 시 즉각적으로 대응하려면 Calculated Insights Object(CIO)에 대한 Data 360-triggered flow를 사용해야 합니다."
+  },
+  {
+    "qNum": 6,
+    "front": "A retailer wants to create a new \"Weekly Deals\" subscription to send promotional content to customers via email and SMS. Which two data model objects (DMOs) in Data 360 are used to define the subscription and map it to communication channels?\nA. Communication Subscription Channel Type and Engagement Channel Type\nB. Communication Subscription and Communication Subscription Consent\nC. Communication Subscription and Communication Subscription Channel Type",
+    "answer": "정답: C. Communication Subscription and Communication Subscription Channel Type",
+    "explanation": "Communication Subscription DMO가 마케팅 콘텐츠 범주를 정의하고, Communication Subscription Channel Type DMO가 채널(이메일, SMS)과의 매핑을 설정합니다."
+  },
+  {
+    "qNum": 7,
+    "front": "A Marketing Cloud Next Consultant wants to automate opt-in consent creation when new contacts are added to Salesforce. What should the consultant use to ensure consent records are created and updated reliably?\nA. A record-triggered flow using the MessagingConsentV2 core action that is configured to run on both create and update\nB. A direct insert into the Messaging Consent data lake object (DLO) that is mapped to the Communication Subscription Consent data model object (DMO)\nC. A Data 360-triggered flow using the standard Create Consent action that is triggered on the Contact Point Email data model object (DMO)",
+    "answer": "정답: C. A Data 360-triggered flow using the standard Create Consent action that is triggered on the Contact Point Email data model object (DMO)",
+    "explanation": "동의 기록을 가장 안정적으로 업데이트하려면 Data 360-triggered flow와 공식 지원되는 'Create Consent' 액션을 사용해야 합니다."
+  },
+  {
+    "qNum": 8,
+    "front": "Northern Trail Outfitters wants its sales team to review each contact's email, form, and page-view engagement directly on the contact record page. How should the Marketing Cloud Next Consultant surface this marketing engagement data?\nA. Install the analytics packages and add the Email Engagement dashboard to the contact record page.\nB. Turn on the Unified Engagement History dashboard and add the component to the contact record page.\nC. Enable web tracking and add the Website Engagement data model object (DMO) component to the contact record page.",
+    "answer": "정답: B. Turn on the Unified Engagement History dashboard and add the component to the contact record page.",
+    "explanation": "영업팀이 CRM 레코드 페이지에서 다양한 마케팅 참여 데이터를 통합적으로 보려면 Unified Engagement History 대시보드를 활성화하여 추가합니다."
+  },
+  {
+    "qNum": 9,
+    "front": "Northern Trail Outfitters (NTO) wants to send a monthly update email that includes the total number of items each customer has purchased to date, as well as that customer's favorite category. NTO wants to include fields such as 'Total Items' and 'Category Name' in the email, but these fields do not exist within the raw ecommerce order data, which is currently ingested and mapped in Data 360. How should NTO resolve this issue?\nA. Build a streaming insight to calculate this metric in real time. Query the purchase volume per category to find the favorite category for each Unified Individual ID.\nB. Build a calculated insight to aggregate the purchase volume for the account. Query the purchase volume per category to find the favorite category for each Unified Individual ID.\nC. Build a custom formula field on the Unified Individual data model object (DMO) using standard SQL aggregate functions to roll up the total items and calculate the favorite category.",
+    "answer": "정답: B. Build a calculated insight to aggregate the purchase volume for the account. Query the purchase volume per category to find the favorite category for each Unified Individual ID.",
+    "explanation": "다중 레코드를 집계(총 구매량, 최애 카테고리)하여 고객(Unified Individual) 단위로 표시하려면 Calculated Insight(계산된 인사이트)를 구축합니다."
+  },
+  {
+    "qNum": 10,
+    "front": "Northern Trail Outfitters (NTO) wants to send a confirmation email immediately after a prospect submits a form on a landing page published in Marketing Cloud Next. NTO wants to personalize the email using the values entered in the submitted form. Which data source should NTO use when configuring the email?\nA. Event Data Provider\nB. Activation Data Provider\nC. Data Graph Data Provider",
+    "answer": "정답: A. Event Data Provider",
+    "explanation": "이메일 발송을 직접 트리거한 이벤트(양식 제출)의 페이로드 데이터를 병합 필드로 사용하려면 Event Data Provider를 선택합니다."
+  },
+  {
+    "qNum": 11,
+    "front": "Northern Trail Outfitters wants to send a personalized one-time verification code immediately after a customer initiates a login on its website. An external web service generates the code and must pass it to Marketing Cloud Next at send time. Which solution should the Marketing Cloud Next Consultant recommend?\nA. Create an automation event-triggered flow that waits for the verification code to be ingested through streaming ingestion and uses a Send Email Message element to send the email.\nB. Create a Data 360-triggered flow that retrieves the verification code from a real-time Data Graph and uses a Send Email Message element to send the email.\nC. Create an on-demand flow invoked through the REST API that includes the verification code in the API request and uses a Send Email Message element to send the email.",
+    "answer": "정답: C. Create an on-demand flow invoked through the REST API that includes the verification code in the API request and uses a Send Email Message element to send the email.",
+    "explanation": "외부 시스템에서 실시간으로 생성된 코드를 지연 없이 발송하려면 REST API를 통해 호출되는 On-Demand Flow를 사용하는 것이 가장 적합합니다."
+  },
+  {
+    "qNum": 12,
+    "front": "A company stores localized promo codes within a custom marketing object. The company wants to dynamically populate the correct promo code into a newsletter based on the recipient's [Region_Code]. What is the most effective way to retrieve and render this data within the email?\nA. Write an AMPscript LookupRows() block within the email to query the marketing object directly at send time using the [Region_Code]. Output the results directly into the email.\nB. Use the Handlebars QueryFirst utility function inline to retrieve the promo code, so it prints natively on the canvas.\nC. Insert standard merge fields utilizing cross-object dot notation ({{{Marketing_Object.Promo_Code_c}}}) to pull the value across using the Unified Individual ID.",
+    "answer": "정답: B. Use the Handlebars QueryFirst utility function inline to retrieve the promo code, so it prints natively on the canvas.",
+    "explanation": "특정 기준(지역 코드)과 일치하는 마케팅 객체의 레코드를 동적으로 조회하여 렌더링하려면 Marketing Cloud Next 네이티브 기능인 Handlebars QueryFirst를 사용합니다."
+  },
+  {
+    "qNum": 13,
+    "front": "A Marketing Cloud Next Consultant observes a spike in Data Services Credits usage in Digital Wallet. The consultant already optimized the number of rows processed by Identity Resolution. Which other method should the consultant use to reduce credit consumption?\nA. Disable \"Run jobs automatically\" on the identity resolution rule(s).\nB. Maintain multiple active rulesets per primary Data Model Object (DMO) per data space.\nC. Delete and recreate data streams to remove unused records.",
+    "answer": "정답: A. Disable \"Run jobs automatically\" on the identity resolution rule(s).",
+    "explanation": "불필요한 크레딧 소모를 막기 위해 Identity Resolution 규칙 설정 시 \"Run jobs automatically(작업 자동 실행)\"를 비활성화하고 필요할 때만 수동 실행합니다."
+  },
+  {
+    "qNum": 14,
+    "front": "Northern Trail Outfitters needs to update an individual's consent in near real time when a customer submits a web form. Which solution should the Marketing Cloud Next Consultant recommend?\nA. Create an automation event-triggered flow that includes a Consent Request Flow element to update the customer's consent preferences.\nB. Use the Data 360 Ingestion API to ingest records into a data stream and map to the Subscription Consent Data Model Object (DMO).\nC. Create a streaming data transform to map incoming form submissions to the Communication Subscription Consent Data Model Object (DMO).",
+    "answer": "정답: A. Create an automation event-triggered flow that includes a Consent Request Flow element to update the customer's consent preferences.",
+    "explanation": "웹 폼 제출과 같은 즉각적인 이벤트에 맞춰 동의를 업데이트하려면 Automation Event-Triggered Flow 내에서 'Create Consent/Consent Request' 액션을 사용합니다."
+  },
+  {
+    "qNum": 15,
+    "front": "A retailer is planning their first \"New Product Promotion\" email campaign in Marketing Cloud Next. Their marketing manager wants to send to everyone in the CRM database who has not explicitly asked to be removed. What will happen when they launch the campaign?\nA. The campaign will only suppress recipients who have previously unsubscribed, as explicit consent is not required in sending marketing campaigns in Marketing Cloud Next.\nB. The campaign will suppress all recipients who do not have an OPT_IN record in either the cache or the Communication Subscription Consent data model object (DMO) for the \"New Product Promotion\" subscription.\nC. The campaign will send successfully because no OPT_OUT record exists in either the cache or the Communication Subscription Consent data model object (DMO) for the \"New Product Promotion\" subscription.",
+    "answer": "정답: B. The campaign will suppress all recipients who do not have an OPT_IN record in either the cache or the Communication Subscription Consent data model object (DMO) for the \"New Product Promotion\" subscription.",
+    "explanation": "Marketing Cloud Next는 명시적 옵트인(Opt-In) 모델을 사용하므로, 긍정적인 OPT_IN 기록이 없는 수신자는 모두 발송 대상에서 제외(suppress)됩니다."
+  },
+  {
+    "qNum": 16,
+    "front": "A Marketing Cloud Next Consultant is designing a flow that uses the Send to Journey element. The business requires that the journey uses a specific contact point derived from an activation template. Which configuration is a prerequisite for this solution to function correctly?\nA. The flow's Data Space must link to the journey's Business Unit.\nB. The journey must use a Salesforce Data Entry Source.\nC. The flow must be a record-triggered flow.",
+    "answer": "정답: A. The flow's Data Space must link to the journey's Business Unit.",
+    "explanation": "Send to Journey 작업을 사용하려면, 흐름이 작동하는 Data Space와 해당 여정이 포함된 Business Unit이 매핑되어 있어야 합니다."
+  },
+  {
+    "qNum": 17,
+    "front": "Northern Trail Outfitters (NTO) wants to track visitor activity on landing pages. To comply with privacy regulations, NTO plans to display a consent banner before enabling tracking. What is the first step NTO should take to create a consent banner?\nA. Create a new CMS content block and assign it as the consent banner to use on landing pages.\nB. Create a new landing page and enable the 'Display Consent Banner' option in the page settings.\nC. Create a new CMS content item using the 'Consent Banner' content type.",
+    "answer": "정답: C. Create a new CMS content item using the 'Consent Banner' content type.",
+    "explanation": "추적 동의 배너를 만들려면 먼저 Salesforce CMS에서 전용 콘텐츠 유형인 'Consent Banner' 항목을 생성해야 합니다."
+  },
+  {
+    "qNum": 18,
+    "front": "A customer has an existing Consent Management Platform (CMP) that manages cookie consent across all external web properties. A Marketing Cloud Next Consultant needs to extend this functionality to the customer's landing pages without showing a duplicate consent banner. How should the consultant configure this?\nA. Enable the Data 360 Web Tracking Consent Banner on the landing pages only, and configure the CMP to sync consent decisions via a server-side API call.\nB. Disable the native Data 360 consent banner, and configure the CMP to deploy the Marketing Cloud Next web tracking embed code when a visitor grants consent.\nC. Enable the Data 360 Web Tracking Consent Banner in the Experience Cloud site Integrations, and suppress the CMP banner on landing pages using a custom CSS rule.",
+    "answer": "정답: B. Disable the native Data 360 consent banner, and configure the CMP to deploy the Marketing Cloud Next web tracking embed code when a visitor grants consent.",
+    "explanation": "타사 CMP를 사용하는 경우 Salesforce 기본 동의 배너를 비활성화하고, 방문자가 CMP에서 동의할 때 추적 삽입 코드가 배포되도록 구성합니다."
+  },
+  {
+    "qNum": 19,
+    "front": "Northern Trail Outfitters contracts a London agency to create assets and deploy email campaigns exclusively for the EMEA region, which is managed in a dedicated EMEA Business Unit. The agency users have been provisioned with the Marketing Cloud Manager permission set. How should the Marketing Cloud Next Consultant grant the agency users the required access?\nA. Add the agency users to the EMEA Business Unit with the Marketer ReadOnly role.\nB. Add the agency users to the EMEA Data Space with the Data 360 Marketing Manager permission set.\nC. Add the agency users to the EMEA Business Unit with the Marketer Standard role.",
+    "answer": "정답: C. Add the agency users to the EMEA Business Unit with the Marketer Standard role.",
+    "explanation": "자산을 만들고 캠페인을 배포하려면 에이전시 사용자는 해당 BU에서 Marketer Standard 역할을 부여받아야 합니다."
+  },
+  {
+    "qNum": 20,
+    "front": "Northern Trail Outfitters wants to create a segment to find all individuals who have made at least one purchase. Purchase data is stored in a related data model object (DMO) that can have multiple records for a single individual. Which two concepts should a Marketing Cloud Next Consultant use in the segment builder to correctly evaluate this condition?\nA. Aggregations and Container Paths\nB. Publish Type and Aggregations\nC. Container Paths and Publish Type",
+    "answer": "정답: A. Aggregations and Container Paths",
+    "explanation": "1:N 관계의 구매 데이터에서 '1회 이상 구매' 조건을 평가하려면 세그먼트 빌더에서 Aggregations(집계) 및 Container Paths를 사용해야 합니다."
+  },
+  {
+    "qNum": 21,
+    "front": "A Marketing Cloud Next Consultant is using Agentforce to generate a conversational email campaign. After reviewing the campaign preview, they notice an extra step in the underlying campaign flow labeled 'Forward to Agent.' What is the function of this specific flow step?\nA. It specifies how to handle the email response from the customer.\nB. It sends a notification to the marketing manager to review the flow.\nC. It pauses the campaign to wait for agent approval before sending.",
+    "answer": "정답: A. It specifies how to handle the email response from the customer.",
+    "explanation": "Conversational Email 캠페인에서 자동 추가되는 'Forward to Agent' 단계는 고객의 이메일 응답을 어떻게 처리하고 라우팅할지 지정합니다."
+  },
+  {
+    "qNum": 22,
+    "front": "Northern Trail Outfitters (NTO) is configuring a sending domain in Unified Messaging Setup, so that it can send branded emails from its own domain. Which type of domain should NTO use to enable branded email delivery?\nA. Authenticated domain, verified with DKIM DNS records\nB. Tracking domain, verified with a bounce CNAME record\nC. Authorized domain, verified with an ownership TXT record",
+    "answer": "정답: A. Authenticated domain, verified with DKIM DNS records",
+    "explanation": "브랜드 이메일의 신뢰성 있는 발송을 위해서는 DKIM DNS 레코드로 인증을 마친 Authenticated domain을 사용해야 합니다."
+  },
+  {
+    "qNum": 23,
+    "front": "Northern Trail Outfitters is launching a Conversational Email campaign and needs to ensure that when a customer replies to the promotional email, Agentforce immediately picks up the thread to answer product questions. How should the Marketing Cloud Next Consultant configure the flow to route these inbound replies to assign the conversation?\nA. Create a record-triggered flow that triggers on Email Message.\nB. Create an Omni-Channel flow that triggers on Inbound Message.\nC. Create a platform event-triggered flow that triggers on an Inbound Message Event.",
+    "answer": "정답: B. Create an Omni-Channel flow that triggers on Inbound Message.",
+    "explanation": "인바운드 대화 스레드를 Agentforce가 즉시 넘겨받아 할당하려면, Inbound Message로 트리거되는 Omni-Channel 라우팅 흐름을 생성해야 합니다."
+  },
+  {
+    "qNum": 24,
+    "front": "Northern Trail Outfitters (NTO) wants to launch a new campaign and needs to pull in data from a newly- mapped custom object. NTO already has a primary Data Graph that is actively being used by several production campaigns, and needs to decide if they should edit or clone the existing Data Graph. What is the correct approach and expected behavior?\nA. Edit the Data Graph. The platform will continue to support the live campaigns using the current version without interruption, while the updated version publishes in the background.\nB. Clone the Data Graph. Editing an active Data Graph immediately invalidates downstream dependencies, causing the live segments to fail until the Data Graph finishes reprocessing.\nC. Create a new Data Graph. Pause all active segments and flows relying on the Data Graph, update the Data Graph, and then reactivate the segments and flows.",
+    "answer": "정답: A. Edit the Data Graph. The platform will continue to support the live campaigns using the current version without interruption, while the updated version publishes in the background.",
+    "explanation": "활성 상태의 Data Graph를 수정(Edit)하더라도, 플랫폼은 백그라운드에서 업데이트 버전을 빌드하는 동안 기존 버전으로 라이브 캠페인을 중단 없이 계속 지원합니다."
+  },
+  {
+    "qNum": 25,
+    "front": "Northern Trail Outfitters (NTO) wants to personalize an email's subject line with a value that is entered at the time of campaign activation, such as 'Exclusive Offer for Hikers'. Which data source should NTO use for the subject line?\nA. Activation\nB. Data Graph\nC. Content Variable",
+    "answer": "정답: C. Content Variable",
+    "explanation": "데이터 360에 저장되지 않고 캠페인 실행 런타임 시(Flow) 직접 입력받는 값을 제목에 동적으로 매핑하려면 Content Variable을 사용합니다."
+  },
+  {
+    "qNum": 26,
+    "front": "Which required fields should a Marketing Cloud Next Consultant configure in Data Graphs for personalization in email and SMS?\nA. Individual ID from 'Individual' object, Email Address from 'Contact Point Email' object, Telephone Number from 'Contact Point Phone' object\nB. Unified Individual ID from 'Unified Individual' object, Email Address from 'Individual' object, Telephone Number from 'Individual Object'\nC. Unified Individual Link ID from 'Unified Individual Link' object, Email Address from 'Contact Point Email' object, Telephone Number from 'Contact Point Phone' object",
+    "answer": "정답: A. Individual ID from 'Individual' object, Email Address from 'Contact Point Email' object, Telephone Number from 'Contact Point Phone' object",
+    "explanation": "이메일 및 SMS 개인화를 위한 필수 Data Graph 필드는 Individual ID(Individual 객체), Email Address(Contact Point Email), Telephone Number(Contact Point Phone)입니다."
+  },
+  {
+    "qNum": 27,
+    "front": "Northern Trail Outfitters (NTO) is designing a monthly 'Trail Rewards' email in Marketing Cloud Next. NTO needs to dynamically personalize the template using two data points: 1) The number of 'Days Since Last Login' to nudge digital adoption, 2) The customer's current 'Loyalty Tier' based on their lifetime spend to apply the correct branding. To minimize Flex Credit consumption within their Digital Wallet, how should a Marketing Cloud Next Consultant configure the template?\nA. Data stream formula for login days and Daily Batch calculated insight for the loyalty tier\nB. Streaming insight for login days and a data stream formula for the loyalty tier\nC. Daily Batch calculated insight for login days and a streaming insight for the loyalty tier",
+    "answer": "정답: A. Data stream formula for login days and Daily Batch calculated insight for the loyalty tier",
+    "explanation": "단순 행 단위 계산인 로그인 경과일은 Data stream formula로 처리하고, 여러 구매 내역 집계가 필요한 등급 계산은 비용 최적화를 위해 Daily Batch calculated insight를 사용합니다."
+  },
+  {
+    "qNum": 28,
+    "front": "Northern Trail Outfitters is creating an ongoing promotional email campaign targeting its entire global audience. Which feature should a Marketing Cloud Next Consultant suggest to maximize individual engagement by achieving higher inbox placement?\nA. Send Time Optimization\nB. Engagement Frequency\nC. Engagement Scoring",
+    "answer": "정답: A. Send Time Optimization",
+    "explanation": "개인별로 이메일을 열어볼 가능성이 가장 높은 최적의 시간에 메시지를 발송하여 참여도를 극대화하려면 Send Time Optimization(STO)을 사용해야 합니다."
+  },
+  {
+    "qNum": 29,
+    "front": "Northern Trail Outfitters configured a segment and its associated audience flow to run daily. Occasionally, the flow runs before the segment refresh is complete, causing it to process outdated segment members. What should a Marketing Cloud Next Consultant recommend?\nA. Add a Wait for Amount of Time element to the audience flow at the start of the flow.\nB. Schedule the segment refresh and audience flow to run at the same time each day.\nC. Configure the audience flow to republish the segment immediately before running the flow.",
+    "answer": "정답: C. Configure the audience flow to republish the segment immediately before running the flow.",
+    "explanation": "흐름이 항상 최신 세그먼트 데이터를 처리하도록 보장하려면, 오디언스 흐름 실행 직전에 세그먼트를 강제로 재게시(republish)하도록 구성합니다."
+  },
+  {
+    "qNum": 30,
+    "front": "Northern Trail Outfitters (NTO) needs to export a list of all the individuals who clicked on a link in its 'Back to School' campaign along with email and phone number. Which approach should NTO use to accomplish this?\nA. Click the Analytics tab and build a report using the Marketing Performance Semantic Model report type.\nB. Navigate to the Campaign tab and export the data directly from the dashboard on the Campaign record.\nC. Open the Marketing Performance tab and filter for the 'Back to School' campaign to view and export individual-level engagement data.",
+    "answer": "정답: A. Click the Analytics tab and build a report using the Marketing Performance Semantic Model report type.",
+    "explanation": "캠페인에 참여(클릭 등)한 개인 수준의 상세 데이터와 속성을 필터링하여 내보내려면 Marketing Performance Semantic Model을 활용한 분석 보고서를 만들어야 합니다."
+  },
+  {
+    "qNum": 31,
+    "front": "Northern Trail Outfitters (NTO) is confused about why its newly imported data is not immediately available and why identity resolution does not update instantly. NTO's identity resolution follows the default automated schedule. What should the Marketing Cloud Next Consultant explain about the timing of data syncs and identity resolution?\nA. Most new data syncs about every 10 minutes, but identity resolution runs only once per day.\nB. New data syncs once per day, and identity resolution runs about every 10 minutes.\nC. All data syncs instantly, but identity resolution runs only once per week.",
+    "answer": "정답: A. Most new data syncs about every 10 minutes, but identity resolution runs only once per day.",
+    "explanation": "CRM 데이터는 일반적으로 약 10분마다 지속해서 동기화되지만, Identity Resolution 작업은 기본적으로 하루에 한 번만 실행되어 반영 주기에 차이가 있습니다."
+  },
+  {
+    "qNum": 32,
+    "front": "Northern Trail Outfitters needs to prevent sending duplicate messages to individuals who have multiple email addresses stored in Data 360. A Marketing Cloud Next Consultant is building an audience flow and must ensure that only one specific email address is used for each individual. Which feature should the consultant use to define the logic for selecting a single, appropriate email address for the message send?\nA. Create and apply a Contact Point Selection Rule in an activation template.\nB. Configure a Salesforce Flow Decision element to query for the primary email.\nC. Implement an identity resolution ruleset to merge duplicate contact points.",
+    "answer": "정답: A. Create and apply a Contact Point Selection Rule in an activation template.",
+    "explanation": "한 개인에게 여러 이메일 주소가 있을 때 중복 발송을 피하고 우선순위에 따라 하나의 이메일만 선택하려면 Activation Template 내에 Contact Point Selection Rule을 정의합니다."
+  },
+  {
+    "qNum": 33,
+    "front": "Northern Trail Outfitters has enabled Email Engagement Scoring in Marketing Cloud Next to generate predictions for email opens, clicks, and unsubscribes. Which data model object (DMO) stores these predictive engagement scores for reporting and segmentation?\nA. Email Engagement Metrics\nB. Email Engagement Profile\nC. Email Engagement Score",
+    "answer": "정답: C. Email Engagement Score",
+    "explanation": "이메일 오픈, 클릭 등 미래의 인게이지먼트 성향을 예측한 결과는 Email Engagement Score DMO에 저장되어 세그먼트 생성 및 보고에 사용됩니다."
+  },
+  {
+    "qNum": 34,
+    "front": "A car dealership manages both retail consumers (B2C) and business fleet customers (B2B). Customer data for each audience is ingested through separate data streams in a single data space and mapped to the Individual Data Model Object (DMO). The dealership wants to create separate identity resolution rulesets for B2B and B2C customers so that each audience can be unified independently for segmentation and activation. Which approach should the Marketing Cloud Next Consultant recommend to ensure B2B and B2C customers are processed by separate identity resolution rulesets?\nA. Configure filters on each identity resolution ruleset to separate B2B and B2C customer records.\nB. Configure separate DMOs for B2B and B2C customers instead of mapping both to the Individual DMO.\nC. Configure filters on the source Data Lake Objects (DLOs) to separate B2B and B2C customer records.",
+    "answer": "정답: A. Configure filters on each identity resolution ruleset to separate B2B and B2C customer records.",
+    "explanation": "동일한 DMO 내에서 B2B와 B2C 레코드를 완전히 분리하여 각각 통합하려면 각 Identity Resolution Ruleset 자체에 소스 필터를 적용합니다."
+  },
+  {
+    "qNum": 35,
+    "front": "A Marketing Cloud Next Consultant wants to create a single, consistent profile for each customer by linking records from various sources like CRM, ecommerce, and loyalty systems. To achieve this, the consultant must create a process to group matching records based on shared identifiers. Which component must the consultant configure in Data 360?\nA. Data Graph\nB. Identity Resolution ruleset\nC. Audience Flow",
+    "answer": "정답: B. Identity Resolution ruleset",
+    "explanation": "다양한 소스의 프로필을 이름, 이메일 등의 공통 식별자로 매칭하고 단일 고객 프로필로 병합하는 과정을 제어하는 것은 Identity Resolution ruleset입니다."
+  },
+  {
+    "qNum": 36,
+    "front": "Northern Trail Outfitters (NTO) wants to send a personalized SMS notification to every passenger on a flight whenever the flight itinerary changes. The notification will be initiated by an external system using a single API request. Which flow type should NTO use to start the flow?\nA. An on-demand flow where passengers affected by the itinerary change are included in the request\nB. A broadcast flow that uses a dynamic segment to identify passengers affected by the itinerary change\nC. An autolaunched flow that processes the affected passenger records before sending notifications",
+    "answer": "정답: A. An on-demand flow where passengers affected by the itinerary change are included in the request",
+    "explanation": "외부 시스템에서 즉각적인 단일 API 호출로 대상 고객(탑승객) 정보를 전달하고 SMS를 발송하려면 REST API로 트리거되는 On-Demand flow를 사용해야 합니다."
+  },
+  {
+    "qNum": 37,
+    "front": "Northern Trail Outfitters wants to automatically send a promotional email to new CRM Contacts using Marketing Cloud Next. Before the email can be sent, what should the Marketing Cloud Next Consultant configure to ensure a new contact is eligible to receive promotional communications?\nA. Create a consent record in the Communication Subscription Consent CRM object.\nB. Use the Create Consent Flow element to set a consent status for the contact point.\nC. Set the Has Opted Out of Email field on the Contact record to False.",
+    "answer": "정답: B. Use the Create Consent Flow element to set a consent status for the contact point.",
+    "explanation": "새 연락처가 마케팅 이메일을 수신할 자격을 갖추게 하려면 흐름(Flow) 내에서 Create Consent(동의 생성) 요소를 사용해 명시적인 옵트인 상태를 설정해야 합니다."
+  },
+  {
+    "qNum": 38,
+    "front": "Northern Trail Outfitters (NTO) wants to set up distinct marketing channels for its North American and European operations. Each region has separate regulatory requirements and branding guidelines. The Marketing Cloud Next Consultant must ensure that marketing activities and assets are completely segregated between the two regions. Which initial step must the consultant take in the Marketing Cloud Next setup?\nA. Implement two distinct Data Spaces in Data 360.\nB. Configure a separate Business Unit for each region.\nC. Establish a unique CMS Workspace for each region.",
+    "answer": "정답: A. Implement two distinct Data Spaces in Data 360.",
+    "explanation": "완전히 격리된 지역별 비즈니스 유닛(BU)을 설정하려면 가장 먼저 기저 데이터 분리를 위한 두 개의 구별되는 Data Space를 구현해야 합니다."
+  },
+  {
+    "qNum": 39,
+    "front": "Northern Trail Outfitters wants to configure its SMS channel so that when a customer replies to a promotional text with a custom question, the interaction is automatically handed off to an AI agent for ongoing support. Which configuration should a Marketing Cloud Next Consultant implement to handle this inbound response?\nA. Omni-Channel flow to route the inbound Messaging Session to the AI agent\nB. Record-triggered flow on the Messaging Session object to route the session to the AI agent\nC. Assignment rule on the Messaging Session object to route the session to the AI agent",
+    "answer": "정답: A. Omni-Channel flow to route the inbound Messaging Session to the AI agent",
+    "explanation": "인바운드 메시지 세션을 포착하여 AI 에이전트나 서비스 상담원에게 대화 컨텍스트를 유지하며 라우팅하려면 Omni-Channel 흐름을 사용해야 합니다."
+  },
+  {
+    "qNum": 40,
+    "front": "A Marketing Cloud Next Consultant is preparing to send emails using an authenticated custom domain. After adding the domain in the Authenticated Domains setup page, Marketing Cloud Next generates the required DNS records. Which action must the consultant perform next to complete the domain authentication process?\nA. Upload the generated TXT record to their domain's DNS provider.\nB. Add the generated CNAME and DKIM records to their domain's DNS provider.\nC. Create a new Sender Authentication Package within Marketing Cloud Next.",
+    "answer": "정답: B. Add the generated CNAME and DKIM records to their domain's DNS provider.",
+    "explanation": "인증된 도메인 설정을 완료하려면 Marketing Cloud Next에서 생성해준 CNAME 및 DKIM 관련 DNS 레코드를 고객사의 실제 DNS 공급자 설정에 추가해야 합니다."
+  },
+  {
+    "qNum": 41,
+    "front": "Northern Trail Outfitters wants to automatically send a customer satisfaction survey email after a Case record in CRM is updated to a status of \"Closed\". Which flow type should a Marketing Cloud Next Consultant use to support this near real-time use case?\nA. An audience flow that uses a Record audience source based on the Case object, where the audience source is configured to include only Case records that meet condition requirements for the defined criteria\nB. A record-triggered flow that runs when a Case record is updated and meets the specified entry criteria, where the flow configuration is optimized for \"Actions and Related Records\" so it executes after the record is saved\nC. An automation event-triggered flow that uses a \"Prospect, Lead, Contact, or Related Record Change\" event which is based on the Case object and meets condition requirements for the defined criteria",
+    "answer": "정답: C. An automation event-triggered flow that uses a \"Prospect, Lead, Contact, or Related Record Change\" event which is based on the Case object and meets condition requirements for the defined criteria",
+    "explanation": "CRM 레코드(Case)의 상태 변경과 동시에 실시간 마케팅 메시지를 발송하려면 Marketing Cloud Next에 최적화된 Automation Event-Triggered Flow(Related Record Change)를 사용합니다."
+  },
+  {
+    "qNum": 42,
+    "front": "Northern Trail Outfitters collects customer data from multiple sources. Analysis shows that the First Name field is most consistently and accurately populated in the Salesforce CRM data source, while data from other systems is less reliable. When creating a Unified Individual profile, the Marketing Cloud Next Consultant must ensure the first name from the CRM is always used if available. Which reconciliation rule should the consultant use?\nA. Custom Reconciliation\nB. Source Sequence\nC. Most Frequent",
+    "answer": "정답: B. Source Sequence",
+    "explanation": "신뢰할 수 있는 특정 데이터 소스(Salesforce CRM)의 우선순위를 높게 지정하여 해당 필드 값을 최우선으로 채택하게 하려면 Source Sequence (또는 Source Priority) 규칙을 사용합니다."
+  },
+  {
+    "qNum": 43,
+    "front": "A Marketing Cloud Next Consultant wants to automate a weekly promotional email to a targeted audience of high-value customers identified within Data 360. Which flow type and configuration should the consultant select?\nA. Build a schedule-triggered flow configured to run weekly and use a Get Records element to query the high-value customer data model object (DMO).\nB. Build an audience flow using a Segment data source (the customer segment) and configure the flow to execute weekly.\nC. Build a Data 360-triggered flow on the high-value customer data model object (DMO) and configure a Scheduled Path to execute weekly.",
+    "answer": "정답: B. Build an audience flow using a Segment data source (the customer segment) and configure the flow to execute weekly.",
+    "explanation": "Data 360에서 식별된 대상 그룹에게 정기적으로 이메일을 보내려면 Audience Flow를 만들고 Segment를 데이터 소스로 지정한 후 매주 실행되도록 예약합니다."
+  },
+  {
+    "qNum": 44,
+    "front": "A Marketing Cloud Next Consultant is implementing Marketing Cloud Next for a customer that currently stores all consent records in Salesforce CRM consent objects. The customer wants to understand how consent is managed in Marketing Cloud Next. What should the consultant explain about the relationship between the CRM consent model and the Marketing Cloud Next consent model?\nA. The CRM consent objects are the source of truth for Marketing Cloud Next consent.\nB. The CRM consent objects are automatically synchronized with the Marketing Cloud Next consent model when Marketing Cloud Next is activated.\nC. The CRM consent model and the Marketing Cloud Next consent model are completely separate, and a custom process is required to keep them in sync.",
+    "answer": "정답: C. The CRM consent model and the Marketing Cloud Next consent model are completely separate, and a custom process is required to keep them in sync.",
+    "explanation": "CRM 시스템의 동의 객체와 Marketing Cloud Next 전용 동의 모델은 기본적으로 완벽히 분리되어 있으므로 두 시스템 간을 맞추기 위한 별도의 동기화 프로세스가 필요합니다."
+  },
+  {
+    "qNum": 45,
+    "front": "Northern Trail Outfitters wants customer service reps to be able to view and update a customer's communication consent preferences directly from the customer's CRM record when interacting with them in the contact center. Which component should a Marketing Cloud Next Consultant add to the Contact record page to enable this capability?\nA. Privacy Consent Status\nB. Data 360 Related Lists\nC. Data 360 Profile Insights",
+    "answer": "정답: A. Privacy Consent Status",
+    "explanation": "서비스 담당자가 CRM 레코드 페이지에서 직접 채널별 마케팅 동의 기본 설정을 즉시 확인하고 업데이트할 수 있게 하려면 Privacy Consent Status 컴포넌트를 사용합니다."
+  },
+  {
+    "qNum": 46,
+    "front": "A contact calls a service rep and asks to be opted out of all marketing emails. What is the correct supported action to opt-out the contact?\nA. Update the consent via the Consent Status flow element.\nB. Update the consent on the contact's preference page.\nC. Update the Opt Out field on the Contact record.",
+    "answer": "정답: A. Update the consent via the Consent Status flow element.",
+    "explanation": "상담원이 연락처의 요청을 받아 동의 계층을 안정적으로 업데이트하려면 Consent Status 요소(현재 Privacy Consent Status 컴포넌트 방식 포함)를 통해 명시적으로 옵트아웃 처리해야 합니다."
+  },
+  {
+    "qNum": 47,
+    "front": "A Marketing Cloud Next Consultant needs to create a re-engagement campaign targeting customers who have not made a purchase in the last 90 days. The campaign will be orchestrated using a flow. The audience for this campaign must be updated automatically as customer purchase behavior changes over time. Which feature must the consultant configure in Data 360 to meet this requirement?\nA. Automation Event-Triggered Flow\nB. Audience Flow\nC. Marketing Object",
+    "answer": "정답: B. Audience Flow",
+    "explanation": "고객 행동 변화에 따라 동적으로 구성원이 바뀌는 타겟 목록을 주기적으로 평가하고 캠페인을 진행하려면 Data 360 세그먼트 기반의 Audience Flow를 구축해야 합니다."
+  },
+  {
+    "qNum": 48,
+    "front": "The marketing team at Northern Trail Outfitters wants customers to reply directly to promotional emails and receive AI-generated responses that can answer product questions, recommend products, and escalate complex inquiries to a human agent when necessary. Which set of implementation activities is required to enable Conversational Email in Marketing Cloud Next?\nA. * Configure escalation experience * Configure a transactional messaging API endpoint * Configure Conversational Email * Create a conversational email campaign * Configure Salesforce Flow for Service\nB. * Configure Reply Mail Management * Create a data stream * Create a conversational email campaign * Enable Journey Builder event processing * Configure Marketing Cloud Connect\nC. * Configure escalation experience * Set up Service Agents * Configure Conversational Email * Create a conversational email campaign * Monitor engagement and routing outcomes",
+    "answer": "정답: C. * Configure escalation experience * Set up Service Agents * Configure Conversational Email * Create a conversational email campaign * Monitor engagement and routing outcomes",
+    "explanation": "Conversational Email을 설정하려면 먼저 상담원 에스컬레이션 경로를 마련하고, 서비스 에이전트와 대화형 이메일 기능 구성 후 캠페인을 만들어 모니터링하는 순서가 필요합니다."
+  },
+  {
+    "qNum": 49,
+    "front": "Northern Trail Outfitters creates a communication subscription named \"Product Announcements\" and associates it with both the Email and SMS channels. When reviewing the Communication Subscription Channel Type data model object (DMO), a developer finds two records for the subscription. How should a Marketing Cloud Next Consultant explain why two records were created?\nA. The DMO creates one record for each contact point associated with the subscription.\nB. The DMO creates separate records for the subscription's Opt In and Opt Out consent statuses.\nC. The DMO creates a separate record for each communication subscription and channel combination.",
+    "answer": "정답: C. The DMO creates a separate record for each communication subscription and channel combination.",
+    "explanation": "Communication Subscription Channel Type DMO는 특정 마케팅 구독 카테고리와 각 지원 채널(이메일, SMS 등)의 매핑 관계를 나타내므로 조합당 하나씩 별도의 레코드가 생성됩니다."
+  },
+  {
+    "qNum": 50,
+    "front": "Northern Trail Outfitters is implementing identity resolution in Data 360 and wants to understand how subsequent runs affect credit consumption. Which records does Data 360 process during each subsequent identity resolution run?\nA. Only records that were created after the previous run\nB. All source records in the data space\nC. Only records that are new or have changed since the previous run",
+    "answer": "정답: C. Only records that are new or have changed since the previous run",
+    "explanation": "후속 Identity Resolution 작업 시 불필요한 전체 재처리를 막고 크레딧 소모를 줄이기 위해, 시스템은 이전 실행 이후 새롭게 추가되거나 변경 사항이 발생한 레코드만 선별하여 처리합니다."
+  },
+  {
+    "qNum": 51,
+    "front": "A healthcare company has very specific requirements for data sharing and privacy. Which scenario requires the healthcare company to add a Business Unit to ensure compliance?\nA. The company requires distinct subscriptions, branding, and authenticated sender domains for general messaging like newsletters, compared to appointment reminder and other transactional-based messaging.\nB. The company must ensure that general marketing users can view standard contact information, but are completely restricted from viewing or querying custom health-related data fields on the Contact record.\nC. The company manages multiple subsidiary clinics and requires strict isolation so that marketers for Clinic A cannot query, segment, or accidentally send campaigns to the profiles belonging to Clinic B.",
+    "answer": "정답: C. The company manages multiple subsidiary clinics and requires strict isolation so that marketers for Clinic A cannot query, segment, or accidentally send campaigns to the profiles belonging to Clinic B.",
+    "explanation": "데이터 공간(Data Space)을 활용하여 부서나 계열사(Clinic A vs B) 간의 고객 프로필 및 데이터 가시성을 엄격히 격리해야 하는 경우에 별도의 Business Unit 생성이 필수적입니다."
+  },
+  {
+    "qNum": 52,
+    "front": "Northern Trail Outfitters (NTO) wants to use dynamic reply addresses. A Marketing Cloud Next Consultant advises NTO that it needs to have the domain authorized. The consultant adds the domain into the \"Authorized Email Domains\" list. What is the next step to complete the verification process?\nA. Create an Authenticated From Address using the domain.\nB. Assign the domain to a Sender Authentication Package.\nC. Confirm domain ownership by adding a generated TXT record to the DNS.",
+    "answer": "정답: C. Confirm domain ownership by adding a generated TXT record to the DNS.",
+    "explanation": "동적 회신 주소를 사용하기 위해 도메인을 리스트에 추가한 후, 플랫폼이 생성한 인증용 TXT 레코드를 회사의 DNS 서버에 등록해야 도메인 소유권 확인 절차가 완료됩니다."
+  },
+  {
+    "qNum": 53,
+    "front": "Northern Trail Outfitters needs to personalize an email content block using data from related objects defined in Data 360. The personalization must reflect attributes tied to Unified Individuals. Which data source type should a Marketing Cloud Next Consultant use to access this related data for personalization?\nA. Data Graph\nB. Personalization Recommender\nC. Unified Individual Data Model Object (DMO)",
+    "answer": "정답: A. Data Graph",
+    "explanation": "단일 프로필을 넘어 여러 Data 360 관련 객체와 결합된 구조적 데이터(구매, 로열티 등)를 이메일 개인화에 활용하려면 Unified Individual 기반의 Data Graph를 사용해야 합니다."
+  },
+  {
+    "qNum": 54,
+    "front": "How does Marketing Cloud Next evaluate consent when determining whether a marketing message can be sent to a customer?\nA. Consent applies to a specific contact point, channel, and subscription.\nB. Consent applies to a specific contact point and is shared across all subscriptions.\nC. Consent applies to an individual, regardless of the channel, subscription, or contact point.",
+    "answer": "정답: A. Consent applies to a specific contact point, channel, and subscription.",
+    "explanation": "마케팅 발송 가능 여부를 평가할 때, Marketing Cloud Next는 고객의 특정 연락처(Contact Point), 전송 채널(Channel), 가입된 구독(Subscription)의 세 가지 교차점에서 동의 상태를 정밀하게 평가합니다."
+  },
+  {
+    "qNum": 55,
+    "front": "Northern Trail Outfitters (NTO) wants to send an immediate SMS message with a white paper link to anyone who submits a lead form on the company website. NTO needs to automate this response based on the real-time submission. Which flow type should the Marketing Cloud Next Consultant configure to meet this requirement?\nA. Activation-triggered\nB. Automation event-triggered\nC. Record-triggered",
+    "answer": "정답: B. Automation event-triggered",
+    "explanation": "폼 제출과 같은 고객의 즉각적인 개별 행동에 실시간으로 반응하여 SMS나 이메일을 자동 발송하려면 Automation Event-Triggered Flow를 구성하는 것이 가장 적합합니다."
+  },
+  {
+    "qNum": 56,
+    "front": "A marketer at Northern Trail Outfitters wants to personalize an email by displaying a customer's loyalty status and points, which requires conditional logic. The data is available via the Data Graph. Which personalization method should the company use to meet this requirement?\nA. Merge fields\nB. Handlebars\nC. Dynamic content blocks",
+    "answer": "정답: B. Handlebars",
+    "explanation": "Data Graph의 값을 기반으로 복잡한 조건부 논리(if, else, compare 등)를 이메일 콘텐츠 내에 직접 적용하려면 프로그래밍 템플릿 언어인 Handlebars를 사용하는 것이 적절합니다."
+  },
+  {
+    "qNum": 57,
+    "front": "A Marketing Cloud Next Consultant needs to ingest tabular data for marketing use cases. Which feature should the consultant use?\nA. File Upload Data Stream\nB. Actionable List\nC. Marketing Object",
+    "answer": "정답: C. Marketing Object",
+    "explanation": "프로모션 코드나 현지화 콘텐츠처럼 Data 360 통합 고객 모델에 넣을 필요 없는 단순하고 가벼운 표 형식의 마케팅 데이터를 수집하고 관리하려면 Marketing Object 기능이 효율적입니다."
+  },
+  {
+    "qNum": 58,
+    "front": "The marketing team at Northern Trail Outfitters needs to deploy a large group of new audience segments next week. To prevent an unexpected credit spike in their Digital Wallet, which configuration settings should the team check and adjust to make sure the segments run efficiently before any data processing begins?\nA. Real-Time Data Graph association, Broadcast Flow activation, and Storage Allocation limits\nB. Segment on Entity, Include or Exclude criteria, and Rank or Limit rules\nC. Run Mode, Frequency, Ends, and Lookback Window",
+    "answer": "정답: C. Run Mode, Frequency, Ends, and Lookback Window",
+    "explanation": "대량 세그먼트 실행 전 예상치 못한 크레딧 초과를 방지하려면, 반드시 실행 모드(Run Mode), 빈도(Frequency), 종료 시점(Ends), 데이터 조회 기간(Lookback Window) 설정을 확인하고 비용 최적화에 맞게 조정해야 합니다."
+  },
+  {
+    "qNum": 59,
+    "front": "Northern Trail Outfitters has created a new Business Unit in Marketing Cloud Next for its EMEA marketing team. An administrator needs to grant existing users access. Which permission set must the administrator have to add users to the new Business Unit?\nA. Marketing Cloud Admin\nB. System Administrator\nC. Business Unit Admin",
+    "answer": "정답: A. Marketing Cloud Admin",
+    "explanation": "새로운 Business Unit 환경에 기존 사용자들을 멤버로 추가하고 권한을 부여하려면, 관리자는 관리적 권한이 포함된 Marketing Cloud Admin 권한 세트를 보유해야 합니다."
+  },
+  {
+    "qNum": 60,
+    "front": "Northern Trail Outfitters (NTO) wants to launch its first Marketing Cloud Next campaign. NTO wants to leverage its robust data to create a highly targeted, personalized experience. Which strategy should NTO take to build its first Data Graph?\nA. Build a single comprehensive Data Graph that works with current and future use cases.\nB. Build a single lean Data Graph for static demographic data and a second one for dynamic transactional data.\nC. Build a single lean Data Graph and expand as more campaigns are launched.",
+    "answer": "정답: C. Build a single lean Data Graph and expand as more campaigns are launched.",
+    "explanation": "초기에는 크레딧과 리소스 낭비를 피하기 위해 현재의 필수 사용 사례에만 맞춘 단일 간소화된 구조(lean Data Graph)로 구축하고, 이후 새로운 요구사항에 따라 유연하게 확장하는 것이 권장됩니다."
+  },
+  {
+    "qNum": 61,
+    "front": "A Marketing Cloud Next Consultant is provisioning a new Marketing Cloud Next Environment. When the consultant clicks \"Deploy\" for the Sales Data Kit in the Setup Assistant, the deployment fails. What is the most likely cause?\nA. The org does not have an active Identity Resolution ruleset running for the Individual object.\nB. The consultant needs to create a CRM Connector within Data 360 before the guided deployment can complete.\nC. The consultant lacks the required profile and permission sets.",
+    "answer": "정답: B. The consultant needs to create a CRM Connector within Data 360 before the guided deployment can complete.",
+    "explanation": "Sales Data Kit는 CRM 객체와 데이터 스트림을 배포하므로, 이를 실행하기 전 반드시 Data 360 내에 Salesforce CRM Connector가 성공적으로 설정되어 있어야 실패를 피할 수 있습니다."
+  },
+  {
+    "qNum": 62,
+    "front": "Northern Trail Outfitters receives a high volume of support cases from customers requesting tracking updates on their orders. These low-value cases are taking up too much of the support team's time. Which solution should a Marketing Cloud Next Consultant implement to autonomously resolve this situation?\nA. Embed a link in each email to the Tracking page that contains a Support AI agent chatbot.\nB. Create a flow to enable support tickets related to \"Where is my order\" to be routed to an AI agent.\nC. Enable Conversational Email on the Order Confirmation and Tracking emails to route the inbound requests to an AI agent.",
+    "answer": "정답: C. Enable Conversational Email on the Order Confirmation and Tracking emails to route the inbound requests to an AI agent.",
+    "explanation": "단순 배송 조회 문의를 자동화하여 지원팀 부하를 줄이려면, 알림 이메일에 Conversational Email 기능을 활성화하여 고객의 답장을 AI 에이전트가 직접 처리하도록 라우팅하는 것이 효과적입니다."
+  },
+  {
+    "qNum": 63,
+    "front": "A Marketing Cloud Next Consultant wants to build an audience flow to send a promotional email series. To prevent a poor customer experience, the flow must suppress each email for any customer who currently has an open support case. Which flow elements and logic should the consultant configure to solve this suppression?\nA. Add a Get Records element to query the Case object followed by a Decision element to correctly route eligible records.\nB. Add an Exclusion Filter element and configure the criteria to drop records where the related Case status is open.\nC. Add a Decision element and configure a cross-object formula within the criteria to evaluate the related Case status directly.",
+    "answer": "정답: A. Add a Get Records element to query the Case object followed by a Decision element to correctly route eligible records.",
+    "explanation": "열린 케이스가 있는 고객을 캠페인 흐름에서 억제하려면 먼저 Get Records 요소를 통해 CRM의 Case 상태를 조회한 후, Decision 요소를 사용해 조건에 맞지 않는 대상을 다른 경로로 라우팅하는 것이 올바른 구조입니다."
+  },
+  {
+    "qNum": 64,
+    "front": "Northern Trail Outfitters wants to enrich its customer profiles by combining CRM Contact data with anonymous web browsing activity captured via the web tracking embed code. A Marketing Cloud Next Consultant has already set up the Contact data stream mapped to the Individual data model object (DMO) and confirmed that web tracking events are flowing into the Website Engagement DMO. What must the consultant configure in Identity Resolution to link anonymous visitor data to known Contact profiles?\nA. Create a Data 360-triggered flow on the Website Engagement DMO to look up the matching Individual record and update the Identity Match DMO with the visitor's email address.\nB. Add a matching rule based on contact point email between the Website Engagement DMO and the Individual DMO, so that form submissions are matched to known Contacts.\nC. Add a custom rule in the identity resolution ruleset to include the Identity Match DMO using the device-to-known record type, so that anonymous visitor IDs are stitched to known Individual IDs.",
+    "answer": "정답: C. Add a custom rule in the identity resolution ruleset to include the Identity Match DMO using the device-to-known record type, so that anonymous visitor IDs are stitched to known Individual IDs.",
+    "explanation": "익명 웹 추적 데이터를 이미 알려진 CRM 프로필과 연결하려면 Identity Resolution 규칙 세트 내에 'device-to-known' 조건의 Identity Match DMO 규칙을 추가하여 식별자를 봉합(stitch)해야 합니다."
+  },
+  {
+    "qNum": 65,
+    "front": "A Marketing Cloud Next Consultant is designing a new marketing initiative. The design includes three automated, multi-step email sequences, each triggered by different customer actions. All three sequences are part of a single, overarching product launch effort. The consultant needs to organize these automations logically within Marketing Cloud Next. How should the consultant structure the campaigns and flows?\nA. Create three campaigns, each with its own related flow.\nB. Create one flow that relates to three separate campaigns.\nC. Create one campaign that relates to three separate flows.",
+    "answer": "정답: C. Create one campaign that relates to three separate flows.",
+    "explanation": "동일한 제품 출시 목적을 공유하지만 고객 행동에 따라 다른 시퀀스가 작동하는 경우, 하나의 광범위한 통합 캠페인에 3개의 독립적인 자동화 흐름(Flows)을 연결하여 논리적으로 구성하는 것이 적절합니다."
+  },
+  {
+    "qNum": 66,
+    "front": "Northern Trail Outfitters just wrapped up its holiday campaign, which included several \"gift-finder\" forms that visitors could fill out on the website. The marketing manager wants a high-level overview of how all the forms performed, and needs to be able to filter the view by date and public title. Where should they go to find this information?\nA. Landing Page Engagement dashboard\nB. Forms Engagement dashboard\nC. Campaign Performance dashboard",
+    "answer": "정답: B. Forms Engagement dashboard",
+    "explanation": "제출된 여러 선물 찾기 폼의 성과 개요를 확인하고 날짜 및 공개 제목으로 필터링하려면 양식 분석에 특화된 Forms Engagement 대시보드를 사용해야 합니다."
+  },
+  {
+    "qNum": 67,
+    "front": "A marketing manager wants to launch a new campaign targeting customers who have recently browsed winter boots but have not purchased. The manager is not an expert in data structures or SQL. They need a way to translate this business requirement into a functional audience segment without technical assistance. Which Marketing Cloud Next capability should the manager use for this task?\nA. Quick Filter for recent browsing activity\nB. AI-Assisted Segment Creation\nC. Segment rules using AND/OR logic",
+    "answer": "정답: B. AI-Assisted Segment Creation",
+    "explanation": "데이터베이스나 SQL 전문가가 아닌 마케터가 자연어 비즈니스 요구사항을 기능적인 대상 세그먼트로 쉽게 변환하려면 AI-Assisted Segment Creation 기능을 활용하는 것이 가장 좋습니다."
+  },
+  {
+    "qNum": 68,
+    "front": "Northern Trail Outfitters (NTO) runs a weekly promotional newsletter. NTO's Marketing Cloud Next Consultant has configured a record-triggered flow on the Lead object in Salesforce that fires when a lead clicks a specific product link in an email. The flow is meant to automatically opt the lead in to a product subscription using the Create Consent action, but the consent record consistently fails to create. What should the consultant configure instead?\nA. Add a Get Records element before the Create Consent action inside the same record-triggered flow to retrieve the Contact Point Email record, and use its ID as the input for the Create Consent action.\nB. Replace the record-triggered flow with an audience flow using a segment of leads who clicked the product link, and use the Create Consent action inside that flow.\nC. Create a Data 360-triggered flow on the Email Engagement Data Model Object (DMO), filtered on Clicks and the specific product link URL, and use the Send time Email Address field to create the consent record.",
+    "answer": "정답: C. Create a Data 360-triggered flow on the Email Engagement Data Model Object (DMO), filtered on Clicks and the specific product link URL, and use the Send time Email Address field to create the consent record.",
+    "explanation": "이메일 클릭 같은 행동 데이터 기반으로 동의를 업데이트하려면 CRM Lead 레코드가 아닌 실제 인게이지먼트 계층인 Email Engagement DMO를 기반으로 하는 Data 360-triggered flow를 생성하여 처리해야 합니다."
+  },
+  {
+    "qNum": 69,
+    "front": "A company is evaluating which Salesforce features require Marketing Cloud Next Advanced Edition versus the Growth Edition. The implementation team has a list of features they plan to use. Which feature from their list mandates the use of Advanced Edition?\nA. Creating account identity resolution rulesets\nB. Creating standard Salesforce reports and dashboards\nC. Creating content in the content builder",
+    "answer": "정답: A. Creating account identity resolution rulesets",
+    "explanation": "기본적인 콘텐츠 빌더나 표준 보고서와 달리, 계정(Account)을 기반으로 하는 Identity Resolution 규칙 세트 생성 기능은 Marketing Cloud Next Advanced Edition에서만 요구됩니다."
+  },
+  {
+    "qNum": 70,
+    "front": "Northern Trail Outfitters runs an identity resolution ruleset that consolidates two individual records into a single Unified Individual profile. One individual record includes a personal email address, while the other contains a work email address. Both email addresses are associated with the same Unified Individual profile. When an Audience Flow uses this Unified Individual to send an email to segment members, what happens by default?\nA. One email is sent to the address designated as the primary Contact Point Email for the Unified Individual.\nB. One email is sent to the address selected by the identity resolution reconciliation rule.\nC. Two emails are sent, one to each email address associated with the Unified Individual.",
+    "answer": "정답: A. One email is sent to the address designated as the primary Contact Point Email for the Unified Individual.",
+    "explanation": "하나의 통합 프로필(Unified Individual)에 여러 유효한 이메일이 연결되어 있더라도, Audience Flow는 설정된 기본 연락처 규칙에 따라 한 개의 이메일만 선택하여 단일 메시지를 전송합니다."
+  },
+  {
+    "qNum": 71,
+    "front": "A Marketing Cloud Next Consultant needs to suppress subscribers from an upcoming audience flow who have a low probability of opening or clicking email content. Which Einstein feature should the consultant use?\nA. Engagement Scoring\nB. Send Time Optimization\nC. Messaging Insights",
+    "answer": "정답: A. Engagement Scoring",
+    "explanation": "이메일을 열거나 클릭할 가능성이 낮은 구독자를 사전에 필터링하거나 제외하려면 개별 인게이지먼트 성향을 예측하는 모델인 Engagement Scoring 기능이 필요합니다."
+  },
+  {
+    "qNum": 72,
+    "front": "Northern Trail Outfitters (NTO) has customers who opted in to its \"Promotions\" email subscription but later opted out. NTO is concerned its \"Product Updates\" emails will also stop sending to those customers. What should the Marketing Cloud Next Consultant do to address this concern?\nA. Advise NTO that its \"Product Updates\" emails will continue sending, since Marketing Cloud Next manages consent at the communication subscription level and an opt-out on one subscription does not affect other subscriptions.\nB. Advise NTO to import a new subscription file related to the \"Product Updates\" subscription, since an opt-out in Marketing Cloud Next is applied globally across all subscriptions for that email address.\nC. Advise NTO to set up an automated re-opt-in campaign targeting opted-out customers, since Marketing Cloud Next requires an active OPT_IN record to be refreshed every 90 days to remain valid.",
+    "answer": "정답: A. Advise NTO that its \"Product Updates\" emails will continue sending, since Marketing Cloud Next manages consent at the communication subscription level and an opt-out on one subscription does not affect other subscriptions.",
+    "explanation": "동의는 통신 카테고리인 각 구독 수준에서 관리되므로 \"Promotions\"의 옵트아웃이 다른 별개의 \"Product Updates\" 발송에 전역적인 영향을 미치지 않음을 설명합니다."
+  },
+  {
+    "qNum": 73,
+    "front": "Northern Trail Outfitters would like customers to choose whether they receive product updates by email or SMS for a given subscription, like newsletters or events. Which data model object (DMO) stores the customer's consent status for each subscription and channel?\nA. Contact Point Consent\nB. Communication Subscription\nC. Communication Subscription Consent",
+    "answer": "정답: C. Communication Subscription Consent",
+    "explanation": "구독 목적(예: 제품 업데이트)과 연결된 개별 통신 채널(이메일, SMS) 조합에 대한 고객의 최종 실제 동의 상태(옵트인 여부)는 Communication Subscription Consent DMO에 직접 기록됩니다."
+  },
+  {
+    "qNum": 74,
+    "front": "A company stores localized promo codes within a custom marketing object. The company wants to dynamically populate the correct promo code into a newsletter based on the recipient's [Region_Code]. What is the most effective way to retrieve and render this data within the email?\nA. Use the Handlebars QueryFirst utility function inline to retrieve the promo code, so it prints natively on the canvas.\nB. Insert standard merge fields utilizing cross-object dot notation ({{{Marketing_Object.Promo_Code_c}}}) to pull the value across using the Unified Individual ID.\nC. Write an AMPscript LookupRows() block within the email to query the marketing object directly at send time using the [Region_Code]. Output the results directly into the email.",
+    "answer": "정답: A. Use the Handlebars QueryFirst utility function inline to retrieve the promo code, so it prints natively on the canvas.",
+    "explanation": "특정 지역 코드 등의 조건에 맞는 데이터를 마케팅 객체에서 즉시 조회하여 렌더링하려면 Handlebars QueryFirst 유틸리티 함수를 사용하는 것이 효율적입니다."
+  },
+  {
+    "qNum": 75,
+    "front": "Northern Trail Outfitters wants to build a promotional email. The email must display a personalized subject line based on the recipient's preferred language (stored as a field on the Contact), and show a dynamically repeated list of recommended products from a related custom data model object (DMO). The audience is a segment of Unified Individuals. Which combination of personalization features should the Marketing Cloud Next Consultant configure?\nA. Use a variation for the subject line, and a Repeater block linked to the Data Graph for the product list.\nB. Use a content variation on the email for each language, and an AMPscript reading from a marketing object for the product list.\nC. Use a merge field from the Data Graph for the subject line, and a Repeater block linked to the Data Graph for the product list.",
+    "answer": "정답: A. Use a variation for the subject line, and a Repeater block linked to the Data Graph for the product list.",
+    "explanation": "다국어 처리와 같은 조건부 콘텐츠에는 Variation(변형) 기능을 활용하고, 길이가 변하는 여러 추천 상품 목록을 표출하려면 Data Graph에 연결된 Repeater 블록 컴포넌트를 사용합니다."
+  },
+  {
+    "qNum": 76,
+    "front": "Northern Trail Outfitters is building an activation-triggered flow to send promotional emails. The marketing team needs to personalize the email content using data derived from the activation, such as a calculated loyalty tier. Which data provider should the company use to personalize the email?\nA. Activation\nB. Data Graph\nC. Apex Class",
+    "answer": "정답: A. Activation",
+    "explanation": "세그먼트 활성화(Activation) 페이로드에 포함된 파생 속성이나 계산된 값을 이메일 내 병합 필드 개인화에 직접 노출하려면 전용 Activation Data Provider를 활용해야 합니다."
+  },
+  {
+    "qNum": 77,
+    "front": "The marketing team at Northern Trail Outfitters wants to create marketing objects to store campaign-related data used for content personalization across different campaigns. Before designing the data model, the team needs to understand the available field types for marketing objects. Which data types are supported when creating marketing objects in Marketing Cloud Next?\nA. Text, Number, and Decimal\nB. Text, Formula, and Decimal\nC. String, Integer, and Boolean",
+    "answer": "정답: A. Text, Number, and Decimal",
+    "explanation": "Marketing Cloud Next의 마케팅 객체에서 데이터 저장용으로 공식 지원되는 기본 필드 형식은 Text, Number, Decimal 등 3가지 유형으로 구성됩니다."
+  },
+  {
+    "qNum": 78,
+    "front": "Northern Trail Outfitters (NTO) wants to use an activation-triggered flow to send a personalized email to a group of customers after they qualify for a segment. Which Activation Target type should NTO configure for the flow?\nA. Data 360\nB. Segment\nC. Loyalty",
+    "answer": "정답: A. Data 360",
+    "explanation": "활성화 기반 흐름(activation-triggered flow)이 문제없이 수신 대상을 포착해 시작되려면 반드시 Activation Target의 대상 유형을 Data 360으로 명확히 구성해야 작동이 보장됩니다."
+  },
+  {
+    "qNum": 79,
+    "front": "A marketing manager needs to send a one-time personalized email that includes localized product names, descriptions, and image URLs. This information is stored in a CSV file and is not available in Data 360 or CRM. What should a Marketing Cloud Next Consultant recommend?\nA. Upload the CSV file to a Marketing object to be used as a data source.\nB. Upload the CSV file into a CRM custom object and ingest into a data stream.\nC. Upload the CSV file as a new data stream and map the fields to a data model object.",
+    "answer": "정답: A. Upload the CSV file to a Marketing object to be used as a data source.",
+    "explanation": "통합 CRM 모델에 지속 관리할 필요 없는 단발성 캠페인용 CSV 데이터라면 복잡한 데이터 스트림 매핑 없이 바로 Marketing object로 업로드하여 개인화에 적용하는 방법이 가장 간편합니다."
+  },
+  {
+    "qNum": 80,
+    "front": "Northern Trail Outfitters is designing its consent management framework using the standard Data 360 data model. Which data model object (DMO) represents a category or purpose of communication that individuals can subscribe to or unsubscribe from?\nA. Communication Subscription Consent\nB. Communication Subscription Channel Type\nC. Communication Subscription",
+    "answer": "정답: C. Communication Subscription",
+    "explanation": "발송 채널과 관계없이 뉴스레터, 이벤트 안내 등 마케팅 커뮤니케이션의 상위 카테고리와 발송 목적 자체를 구조적으로 정의하는 것은 Communication Subscription DMO입니다."
+  },
+  {
+    "qNum": 81,
+    "front": "Northern Trail Outfitters wants to reduce customer email fatigue and opt-outs. Which feature should the Marketing Cloud Next Consultant configure to achieve this goal?\nA. Engagement Frequency\nB. Send Time Optimization\nC. Messaging Insights",
+    "answer": "정답: A. Engagement Frequency",
+    "explanation": "메시지 빈도를 조절해 피로도를 예방하고 수신 거부를 방지하려면, 각 구독자에게 적절한 전송 횟수를 계산하여 과다 노출을 막아주는 Engagement Frequency(참여 빈도) 모델이 필수적입니다."
+  },
+  {
+    "qNum": 82,
+    "front": "Northern Trail Outfitters wants to create a campaign targeting prospects. However, a marketer discovers that prospect records cannot be added as campaign members. How should a Marketing Cloud Next Consultant explain this behavior?\nA. Prospects must be represented as a lead or contact.\nB. Prospects can only be added as campaign members using an audience flow.\nC. Prospects can be added as campaign members only after the campaign has been set to active.",
+    "answer": "정답: A. Prospects must be represented as a lead or contact.",
+    "explanation": "Prospect(잠재 고객) 레코드는 Salesforce 캠페인 구성원 객체에 직접 할당되는 것을 지원하지 않으며, 캠페인 멤버가 되려면 반드시 Lead나 Contact 형태로 변환되어 표현되어야 함을 안내해야 합니다."
+  },
+  {
+    "qNum": 83,
+    "front": "Northern Trail Outfitters (NTO) wants to design an event registration experience in Marketing Cloud Next. NTO asks for a call-to-action (CTA) button in an email that sends visitors to the registration form. How should the Marketing Cloud Next Consultant create the registration form?\nA. Publish the form as standalone content and set the CTA link to open the form URL.\nB. Copy the form code snippet and add it to an HTML component in the email.\nC. Add the form component to a landing page and set the CTA link to open the landing page URL.",
+    "answer": "정답: C. Add the form component to a landing page and set the CTA link to open the landing page URL.",
+    "explanation": "마케팅 폼을 단독 배포하거나 이메일에 임베드할 수 없으므로, 랜딩 페이지 내에 폼 컴포넌트를 구성한 뒤 이메일 CTA 버튼 링크가 해당 랜딩 페이지 URL로 연결되도록 해야 완벽한 경험을 제공합니다."
+  },
+  {
+    "qNum": 84,
+    "front": "A Marketing Cloud Next Consultant is configuring an Audience Flow for a personalized email campaign. The campaign must target a specific group of existing Contacts, without using a Data 360 segment. The email must include each recipient's first name and account name. What should the consultant recommend?\nA. Upload a CSV file to marketing objects and reference the records using AMPscript in the email for personalization.\nB. Use the Data Graph as the entry source of the Audience Flow, and leverage merge fields to personalize the email.\nC. Create an Actionable List populated from a Contact list view or CSV import, and use Content Variables for email personalization.",
+    "answer": "정답: C. Create an Actionable List populated from a Contact list view or CSV import, and use Content Variables for email personalization.",
+    "explanation": "조건 기반 동적 세그먼트 없이 이미 확정된 특정 연락처 그룹에 신속히 흐름을 적용하려면 Actionable List를 오디언스로 삼고, Content Variables를 통해 메일 내 개인화 변수를 구성해야 합니다."
+  },
+  {
+    "qNum": 85,
+    "front": "A Marketing Cloud Next Consultant is troubleshooting a flow that sends personalized emails. They want to view engagement metrics of each Send Email Message element within the flow. How should the consultant accomplish this?\nA. Open the Analytics tab for each flow element.\nB. Debug the flow in Flow Builder.\nC. Review the Flow Interview logs in Setup.",
+    "answer": "정답: A. Open the Analytics tab for each flow element.",
+    "explanation": "개별 전송 요소의 발송 성과 및 인게이지먼트를 시스템 로그나 디버그 모드가 아닌 직관적인 UI로 확인하려면 해당 흐름 편집 패널 내 Analytics 탭(On-Canvas Insights)을 열어 파악할 수 있습니다."
+  },
+  {
+    "qNum": 86,
+    "front": "A car dealership manages both retail consumers (B2C) and business fleet customers (B2B). Customer data for each audience is ingested through separate data streams in a single data space and mapped to the Individual Data Model Object (DMO). The dealership wants to create separate identity resolution rulesets for B2B and B2C customers so that each audience can be unified independently for segmentation and activation. Which approach should the Marketing Cloud Next Consultant recommend to ensure B2B and B2C customers are processed by separate identity resolution rulesets?\nA. Configure separate DMOs for B2B and B2C customers instead of mapping both to the Individual DMO.\nB. Configure filters on each identity resolution ruleset to separate B2B and B2C customer records.\nC. Configure filters on the source Data Lake Objects (DLOs) to separate B2B and B2C customer records.",
+    "answer": "정답: B. Configure filters on each identity resolution ruleset to separate B2B and B2C customer records.",
+    "explanation": "B2B와 B2C 레코드처럼 동일한 DMO에 혼재된 서로 다른 대상을 독립적으로 통합하려면 각 Identity Resolution ruleset 자체에 적용되는 사전 처리 필터를 구성해 대상을 나누어야 합니다."
+  },
+  {
+    "qNum": 87,
+    "front": "Northern Trail Outfitters wants to send a post-purchase follow-up message via WhatsApp. The message must include the Order Number from the purchase that triggered the send. Which data source type should a Marketing Cloud Next Consultant configure to include the Order Number in the WhatsApp message?\nA. Data Graph\nB. Salesforce Record\nC. Event",
+    "answer": "정답: C. Event",
+    "explanation": "주문 발생 등 트리거링 액션 자체가 생성한 정보(주문 번호)를 메시지 변수로 삽입하려면 이벤트 페이로드 속성을 제공하는 Event 데이터 소스를 활용하는 것이 최적의 아키텍처입니다."
+  },
+  {
+    "qNum": 88,
+    "front": "Northern Trail Outfitters (NTO) wants to include a list of purchased products in an order confirmation email. The order includes the product name, image URL, and price for each item in the order. How should NTO display all of the purchased products in the email?\nA. Create variations in the email for each product and configure targeting rules based on the orderdata.\nB. Add a Repeater component to the email and configure the Repeater Source to use the order data.\nC. Use AMPscript to retrieve the order data as a rowset and loop through the records to render each product.",
+    "answer": "정답: B. Add a Repeater component to the email and configure the Repeater Source to use the order data.",
+    "explanation": "품목 수가 가변적인 여러 아이템 리스트를 이메일에 표시하려면 주문 데이터 컬렉션을 소스로 한 Repeater 컴포넌트를 사용하여 블록 내 병합 필드가 동적으로 반복 렌더링되게 구성합니다."
+  },
+  {
+    "qNum": 89,
+    "front": "Northern Trail Outfitters (NTO) wants to include a Last_Purchased_Date field from a Data Graph in a new marketing email. The date/time value is displayed as 2027-03-15T08:30:45 when previewing the email. NTO wants it to display as: Monday, March 15, 2027 8:30 AM. Which approach should NTO use?\nA. Use a Handlebars helper to format the value.\nB. Use an SOQL function to transform the value.\nC. Use a Salesforce formula operator to format the value.",
+    "answer": "정답: A. Use a Handlebars helper to format the value.",
+    "explanation": "원시 날짜 데이터를 읽기 편한 사용자 정의 텍스트 패턴이나 문화권 기반 날짜/시간 형식으로 변환하여 표출할 때는 프레젠테이션 로직인 Handlebars format helper 기능을 활용해야 합니다."
+  },
+  {
+    "qNum": 90,
+    "front": "Northern Trail Outfitters needs to send a highly personalized SMS message to customers. The personalization logic requires a complex, real-time calculation based on external system data that is not stored in Data 360. The logic must be executed at the time of send to ensure the data is current. Which data source should a Marketing Cloud Next Consultant use to meet this requirement?\nA. Data Graph\nB. Event\nC. Apex Class",
+    "answer": "정답: C. Apex Class",
+    "explanation": "Data 360 외부에 있는 실시간 데이터를 가져오거나 발송 시점의 복잡한 로직 및 계산이 수반되어야 할 때는 맞춤형 실행 코드가 필요한 Apex Class 데이터 공급자를 채택해야 원활히 동작합니다."
+  },
+  {
+    "qNum": 91,
+    "front": "Northern Trail Outfitters needs to send a one-time promotional email to a specific, fixed group of individuals who registered at a recent trade show. The attendees have been imported into Marketing Cloud Next. Which Data 360 feature is the most appropriate choice for this use case?\nA. Actionable List\nB. Segment\nC. Marketing Object",
+    "answer": "정답: A. Actionable List",
+    "explanation": "동적 조건 평가가 필요 없는 명확히 한정된 수입 참석자 그룹(예: 박람회 등록자)을 일회성으로 타겟팅할 때는 동적 세그먼트보다 정적 집합인 Actionable List를 쓰는 편이 훨씬 적합합니다."
+  },
+  {
+    "qNum": 92,
+    "front": "A Marketing Cloud Next Consultant needs to track the number of emails and SMS messages sent and determine how many credits remain in their entitlement. How should the consultant find this information?\nA. Review the Consumption Cards in Digital Wallet.\nB. Navigate to Usage-Based Entitlements in Setup.\nC. Build a custom report using the Data 360 harmonization logs.",
+    "answer": "정답: A. Review the Consumption Cards in Digital Wallet.",
+    "explanation": "이메일이나 SMS 사용 현황, 소모된 메시지 크레딧 및 잔여 한도 등의 구독 관리 지표를 직관적으로 검토하려면 설정 내의 Digital Wallet Consumption Cards(소비 카드) 뷰를 살펴봐야 합니다."
+  },
+  {
+    "qNum": 93,
+    "front": "Northern Trail Outfitters (NTO) is investigating reports that promotional emails are being delivered to individuals who have previously opted out earlier the same day. NTO discovers that customer consent preferences are updated daily using a batch data transform that writes directly to the Communication Subscription Consent data model object (DMO), causing customer complaints. Which action should the Marketing Cloud Next Consultant take to resolve it?\nA. Use a streaming data transform to update consent in near real time.\nB. Configure a Create Consent action in a Data 360-triggered flow to update consent.\nC. Change the frequency of the batch data transform schedule to run hourly.",
+    "answer": "정답: B. Configure a Create Consent action in a Data 360-triggered flow to update consent.",
+    "explanation": "데이터 변환을 통한 직접 DMO 업데이트는 동의 상태 불일치를 유발하므로, 공인된 동의 계층 서비스인 Data 360-triggered flow와 Create Consent 액션을 구성해 안전하게 업데이트해야 합니다."
+  },
+  {
+    "qNum": 94,
+    "front": "Northern Trail Outfitters' sales reps want to see the Overall Marketing Score for leads, contacts, and prospects on the record page. What should the Marketing Cloud Next Consultant do to achieve this?\nA. Add a Custom Report based on the Overall Marketing Score to the Page Layout.\nB. Add the Data 360 Profile Insights component to the Page Layout and select the Overall Marketing Score.\nC. Add the Unified Engagement History dashboard component to the Page Layout and select the Overall Marketing Score.",
+    "answer": "정답: B. Add the Data 360 Profile Insights component to the Page Layout and select the Overall Marketing Score.",
+    "explanation": "사용자 정의 보고서 설정 없이 영업 담당자가 레코드 페이지 레이아웃 내에서 바로 전체 마케팅 점수 등급을 확인할 수 있게 하려면 Data 360 Profile Insights 컴포넌트를 배치해 사용합니다."
+  },
+  {
+    "qNum": 95,
+    "front": "Northern Trail Outfitters sends a promotional email weekly. The audience segment refreshes daily, although the source data is updated only once a week. Data 360 credit consumption is higher than expected. What should a Marketing Cloud Next Consultant recommend?\nA. Change the segment run mode to Do Not Schedule and configure the flow to republish the segment immediately before running the flow.\nB. Configure an activation filter to include only records updated during the previous week while retaining the segment's refresh schedule.\nC. Change the segment to a streaming segment so that membership is continuously updated before the weekly flow runs.",
+    "answer": "정답: A. Change the segment run mode to Do Not Schedule and configure the flow to republish the segment immediately before running the flow.",
+    "explanation": "원본 데이터가 덜 자주 업데이트될 때 매일 발생하는 세그먼트 게시 크레딧을 최적화하려면 예약 실행(Do Not Schedule)을 끄고 주간 이메일 흐름 직전에 수동 재게시(republish)하도록 구성합니다."
+  },
+  {
+    "qNum": 96,
+    "front": "Northern Trail Outfitters ingests customer records from its commerce and loyalty systems into Data 360. The records represent the same customer but have different source identifiers. How does Identity Resolution determine that these records belong to the same Unified Individual?\nA. It merges the source records into a single Individual record based on survivorship rules.\nB. It applies reconciliation rules to match records and determine the preferred attribute values.\nC. It applies match rules to compare profile attributes and identify Individual records that should be unified.",
+    "answer": "정답: C. It applies match rules to compare profile attributes and identify Individual records that should be unified.",
+    "explanation": "서로 다른 시스템의 데이터가 같은 고객임을 결정짓기 위해 Identity Resolution은 속성(이름, 정규화된 이메일 등)을 비교하는 Match rules(일치 규칙)를 적용하여 연결을 판별합니다."
+  },
+  {
+    "qNum": 97,
+    "front": "Northern Trail Outfitters needs to personalize an email with: The recipient's assigned sales rep's name (stored in Agentforce Sales) and A unique, time-sensitive promo code (managed in Marketing Cloud Next). Which data sources should the company use for each?\nA. Salesforce Record for the sales rep's name and an Offer for the promo code\nB. Apex Class for the sales rep's name and a Data Graph for the promo code\nC. Data Graph for both the sales rep's name and the promo code",
+    "answer": "정답: A. Salesforce Record for the sales rep's name and an Offer for the promo code",
+    "explanation": "Agentforce에 보관된 현재 업무 관계 정보(영업 사원 이름)는 Salesforce Record 소스에서, 마케팅 프로모션 할인 코드는 Offer 전용 데이터 소스를 통해 이메일 개인화에 반영해야 합니다."
+  },
+  {
+    "qNum": 98,
+    "front": "Northern Trail Outfitters wants to provide its marketing team with a deeper understanding of email campaign performance. The marketing manager needs to create a custom report that details unsubscribe reasons and failed send statuses, leveraging the unified data model. Which component should the Marketing Cloud Next Consultant use to build this detailed report?\nA. The Marketing Insights for Agentforce Sales dashboard\nB. A Lightning Report using the Marketing Performance Semantic Data Model\nC. A custom report type based on the Campaign Member object",
+    "answer": "정답: B. A Lightning Report using the Marketing Performance Semantic Data Model",
+    "explanation": "단순 캠페인 멤버 객체로는 확인할 수 없는 발송 실패나 구독 취소 등 인게이지먼트 차원의 세밀한 분석을 위해선 Marketing Performance Semantic Data Model을 활용한 Lightning 보고서가 필요합니다."
+  },
+  {
+    "qNum": 99,
+    "front": "Employees at an online retailer want to use AI to gain insights into existing business accounts and identify buyer group members to nurture. Which Marketing Cloud Next Agent should they deploy?\nA. Agentforce Employee\nB. Account Discovery\nC. Segment Creation",
+    "answer": "정답: B. Account Discovery",
+    "explanation": "기존 기업 계정을 탐색하여 인사이트를 도출하고 새로운 잠재 구매 그룹 구성원을 육성 목적으로 식별하려는 특정 상황에서는 Account Discovery 역할 전담 에이전트를 도입해야 효과적입니다."
+  },
+  {
+    "qNum": 100,
+    "front": "Which permission sets are required for a System Administrator to perform basic setup?\nA. Data 360 Architect and Marketing Cloud Admin\nB. Data 360 Architect and Marketing Cloud Manager\nC. Data 360 Activation Manager and Marketing Cloud Admin",
+    "answer": "정답: A. Data 360 Architect and Marketing Cloud Admin",
+    "explanation": "Marketing Cloud Next의 기본적인 기능 관리뿐만 아니라 데이터 구조 전반의 초기 시스템 셋업을 완수하려면 관리자가 Data 360 Architect 및 Marketing Cloud Admin 권한 세트를 모두 갖춰야 합니다."
+  },
+  {
+    "qNum": 101,
+    "front": "In addition to Marketing Cloud Admin, which permission set is required to enable Marketing Performance in Marketing Cloud Next?\nA. Data 360 Activation Manager\nB. Tableau Next Included App Business User\nC. Data 360 Architect",
+    "answer": "정답: C. Data 360 Architect",
+    "explanation": "Marketing Performance Intelligence 인프라를 활성화하고 셋업하려면 Marketing Cloud Admin 권한과 함께 필수 아키텍처 접근 권한인 Data 360 Architect가 관리자에게 부여되어야 합니다."
+  },
+  {
+    "qNum": 102,
+    "front": "Northern Trail Outfitters uses distinct Business Units for each of its shoe lines. The central marketing team needs to provide a set of legally approved brand logos and disclaimers that all marketers, regardless of Business Unit, must use in their emails. The goal is to enforce brand consistency while giving Business Unit marketers the ability to create their own campaigns. Which governance model should the Marketing Cloud Next Consultant recommend to meet this requirement?\nA. Assign marketers to a new permission set for access to a central content folder inside the enhanced CMS workspace.\nB. Use a central enhanced CMS workspace and publish approved content to the Common Assets library.\nC. Store the approved assets in one Business Unit's enhanced CMS workspace and grant contributor access to all users.",
+    "answer": "정답: B. Use a central enhanced CMS workspace and publish approved content to the Common Assets library.",
+    "explanation": "다수의 독립된 Business Unit 전반에 걸쳐 승인된 로고 등 브랜드 필수 자산을 일관성 있게 공유하려면 중앙 CMS 작업 공간에서 Common Assets 라이브러리로 콘텐츠를 공식 게시하는 모델을 권장합니다."
+  },
+  {
+    "qNum": 103,
+    "front": "Northern Trail Outfitters wants website visitors to be able to register for an upcoming event on a landing page. When a visitor submits the registration form, a Lead record should be created in CRM. Which set of components should a Marketing Cloud Next Consultant configure to support this use case?\nA. Landing page, form handler, and data stream\nB. Landing page, form, and flow\nC. Web-to-lead form, data stream, and flow",
+    "answer": "정답: B. Landing page, form, and flow",
+    "explanation": "방문자의 폼 제출 정보를 기반으로 CRM 내 잠재 고객(Lead)을 완벽하게 생성하려면 양식을 보여줄 Landing page, 입력 데이터를 모을 Form, 생성 과정을 처리할 Flow 컴포넌트가 세트로 구성되어야 합니다."
+  },
+  {
+    "qNum": 104,
+    "front": "Northern Trail Outfitters wants customers to reply directly to order notification emails with any questions. Customer replies must be analyzed for intent and routed to an agent or a human representative while preserving the context of the interaction. Which solution should a Marketing Cloud Next Consultant recommend?\nA. Configure Reply Mail Management with Agentforce 360 to analyze replies and create cases for human escalations.\nB. Configure Conversational Email with Agentforce 360 and Digital Engagement to analyze and route customer replies.\nC. Use Engagement Scoring to analyze replies, then route using an automation event-triggered flow.",
+    "answer": "정답: B. Configure Conversational Email with Agentforce 360 and Digital Engagement to analyze and route customer replies.",
+    "explanation": "답장 이메일의 문맥 보존을 통해 의도를 파악하고, AI 에이전트와 휴먼 상담원 사이를 매끄럽게 연결하는 자동화된 상호 작용을 구현하려면 Conversational Email 설정을 도입해야 합니다."
+  },
+  {
+    "qNum": 105,
+    "front": "A Marketing Cloud Next Consultant needs to give Northern Trail Outfitters a view of standard email key performance indicators (KPIs), such as open rate, click rate, and bounce rate across all email sends, filterable by date range and email message. Which easy to use dashboard should the consultant use?\nA. Campaign Performance\nB. Email Engagement\nC. Unified Engagement History",
+    "answer": "정답: B. Email Engagement",
+    "explanation": "다수의 발송 캠페인에 대해 이메일 오픈율, 클릭률, 반송률 등의 세부 성과 지표를 기간이나 개별 메시지에 따라 필터링해 손쉽게 확인하려면 직관적인 Email Engagement 대시보드가 가장 적합합니다."
+  },
+  {
+    "qNum": 106,
+    "front": "A Marketing Cloud Next Consultant wants to build a messaging flow that delivers a notification to everyone that has active consent in SMS or Email. The notification must only be sent via one channel using the following logic. * If the customer is opted in to both channels, the flow must route to their preferred channel. * If they are opted out of their preferred channel, it must route to the alternative channel. Which flow element and configuration should the consultant select to handle this routing?\nA. Add a Decision element with multiple configured outcomes.\nB. Add several nested Decision elements.\nC. Add an Omni-Channel Routing action.",
+    "answer": "정답: A. Add a Decision element with multiple configured outcomes.",
+    "explanation": "여러 동의 조건이나 우선 채널 조건 평가를 모두 포괄하여 명확한 분기 경로를 제공하려면 다중 결과를 설정할 수 있는 단일 Decision 요소를 추가하여 흐름 논리를 단순화해야 합니다."
+  }
+]
