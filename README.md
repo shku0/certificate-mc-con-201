@@ -1,31 +1,35 @@
-# MC-Con-201 Flashcards App
+# MC-Con-201 Flashcards & Mock Exam App
 
-Salesforce Marketing Cloud Next Consultant (MC-Con-201) 자격증 시험 대비를 위한 웹 기반 플래시카드 애플리케이션입니다. 별도의 설치 없이 브라우저 환경에서 즉시 실행 가능하며, 커스텀 문제 데이터를 쉽게 로드하여 학습할 수 있습니다.
+Salesforce Marketing Cloud Next Consultant (MC-Con-201) 자격증 시험 대비를 위한 웹 기반 학습 및 실전 모의고사 애플리케이션입니다. 별도의 설치 없이 브라우저 환경에서 즉시 실행 가능하며, JSON 데이터를 자동으로 불러오거나 직접 입력하여 학습할 수 있습니다.
 
 ## 주요 기능
-* 학습 모드 지원
-  * 테스트 모드: 클릭 시 정답과 해설을 확인할 수 있는 3D 플래시카드 모드
-  * 학습 모드: 문제와 해설을 동시에 나열하여 빠르게 읽고 넘기는 스크롤 모드
+* 학습 모드 (3D 플래시카드 및 북마크)
+  * 3D 카드 뒤집기: 카드를 탭하거나 스페이스바를 누르면 3D 회전 애니메이션과 함께 정답 및 한국어 핵심 해설을 확인할 수 있습니다.
+  * 내부 스크롤 지원: 긴 지문과 객관식 보기(A, B, C)를 모바일과 PC 환경 모두에서 편안하게 스크롤하며 읽을 수 있습니다.
+  * 별표 표시 및 모아보기: 중요한 문제에 별표를 표시하고, 상단의 필터 버튼을 통해 별표로 체크한 문항만 따로 모아 집중 복습할 수 있습니다.
+* 테스트 모드 (실전 모의고사 및 오답 반복)
+  * 실전 모의고사 모드: 문제 풀이 중에는 정답이 노출되지 않으며, 카드 하단의 이전/다음 버튼으로 이동하여 전체 문항을 푼 뒤 우측 상단의 [시험 제출 및 채점하기] 버튼을 눌러 일괄 채점할 수 있습니다.
+  * 결과 필터링 복습: 채점 완료 후 총점을 확인하고 전체 보기, 틀린 문제만 보기, 별표 표시한 문제만 보기로 필터링하여 오답을 정리할 수 있습니다.
+  * 오답 맞힐 때까지 반복(ON/OFF): 스위치를 활성화하면 보기를 선택하는 즉시 정오답과 해설을 확인하며, 틀린 문제는 큐의 뒤쪽에 다시 출제되어 모든 문제를 맞힐 때까지 반복 학습합니다.
 * 인터페이스 제어
-  * 모바일 환경: 좌우 스와이프 제스처를 통한 카드 이동 지원
-  * 데스크톱 환경: 키보드 방향키(이동) 및 스페이스바(뒤집기) 지원
-* 커스텀 데이터 로드
-  * JSON 포맷의 문제 세트를 웹 화면에서 직접 입력하여 전체 학습 데이터 즉시 교체 가능
+  * 학습 모드: 모바일 좌우 스와이프 제스처 및 PC 키보드 방향키(이동), 스페이스바(카드 뒤집기) 지원
+  * 테스트 모드: 오작동 방지를 위해 카드 박스 최하단에 배치된 전용 이전/다음 버튼 및 PC 키보드 방향키로 이동
+* 데이터 로드
+  * 동일 경로의 `data.json` 파일을 자동으로 불러오며, 우측 상단의 [데이터 불러오기] 버튼을 통해 JSON 배열 데이터를 직접 붙여넣어 교체할 수도 있습니다.
 
-## 사용 방법
-1. 우측 상단의 [데이터 불러오기] 버튼을 클릭합니다.
-2. 텍스트 입력 창에 공유받은 문제 세트(JSON 포맷)를 붙여넣습니다.
-3. [적용하기] 버튼을 누르면 입력한 데이터가 로드되어 학습을 시작할 수 있습니다.
+## 파일 구성
+* `index.html`: 웹 애플리케이션 UI 및 학습/모의고사 로직
+* `data.json`: MC-Con-201 전체 문항 데이터셋
 
 ### 데이터 포맷 양식
-새로운 문제 데이터를 추가할 경우, 아래의 JSON 배열 형식을 준수하여 작성해야 합니다.
+새로운 문제 데이터를 추가하거나 수동으로 불러올 경우, 아래의 JSON 배열 형식을 준수해야 합니다.
 
 ```json
 [
   {
     "qNum": 1,
-    "front": "How to generate a segment matching the campaign brief from Campaign Creation Agent?\n\nA. Create new\nB. Ask Agent in chat\nC. Review draft in Segment Creation",
+    "front": "How to generate a segment matching the campaign brief from Campaign Creation Agent?\nA. Create new\nB. Ask Agent in chat\nC. Review draft in Segment Creation",
     "answer": "정답: C. Review draft in Segment Creation",
-    "explanation": "Agent가 캠페인 컨텍스트를 바탕으로 이미 세그먼트 초안을 자동 생성하므로, Segment Creation에서 검토 및 수정만 하면 됩니다."
+    "explanation": "Campaign Creation Agent가 세그먼트 초안을 자동 생성하므로, Segment Creation에서 이를 검토하고 다듬기만 하면 됩니다."
   }
 ]
