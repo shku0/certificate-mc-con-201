@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MC-Con-201 학습 앱</title>
+    <title>MC-Con-201 Flashcards</title>
     <style>
         :root {
-            --primary-color: #00A1E0; /* Salesforce Blue */
-            --primary-hover: #0089bd;
+            --primary-color: #00A1E0; 
             --bg-color: #f4f6f9;
             --card-bg: #ffffff;
             --text-color: #333333;
@@ -16,310 +15,99 @@
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; align-items: center;
+            height: 100vh; overflow: hidden;
         }
 
         .app-container {
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
+            width: 100%; max-width: 600px;
+            padding: 20px; box-sizing: border-box;
+            display: flex; flex-direction: column;
             height: 100%;
-            position: relative;
         }
 
-        header {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 15px;
-        }
+        header { margin-bottom: 15px; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        h1 { font-size: 1.3rem; margin: 0; color: var(--primary-color); }
 
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 1.3rem;
-            margin: 0;
-            color: var(--primary-color);
-        }
-
-        .btn-import {
-            background: var(--card-bg);
-            border: 1px solid #ddd;
-            color: var(--text-light);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: all 0.2s;
-        }
-
-        .btn-import:hover {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        /* 모드 전환 토글 스위치 */
         .mode-toggle {
-            display: flex;
-            background: #e0e0e0;
-            border-radius: 30px;
-            overflow: hidden;
-            position: relative;
-            margin-bottom: 5px;
+            display: flex; background: #e0e0e0; border-radius: 30px;
+            position: relative; margin-bottom: 5px;
         }
-
-        .mode-toggle input[type="radio"] {
-            display: none;
-        }
-
+        .mode-toggle input[type="radio"] { display: none; }
         .mode-toggle label {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            z-index: 1;
-            transition: color 0.3s;
-            color: var(--text-light);
+            flex: 1; text-align: center; padding: 10px; font-size: 0.9rem;
+            font-weight: 600; cursor: pointer; z-index: 1; transition: color 0.3s; color: var(--text-light);
         }
-
-        .mode-toggle input[type="radio"]:checked + label {
-            color: white;
-        }
-
+        .mode-toggle input[type="radio"]:checked + label { color: white; }
         .toggle-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 50%;
-            background-color: var(--primary-color);
-            border-radius: 30px;
-            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            z-index: 0;
+            position: absolute; top: 0; left: 0; height: 100%; width: 50%;
+            background-color: var(--primary-color); border-radius: 30px;
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 0;
         }
-
         #mode-study:checked ~ .toggle-bg { transform: translateX(0); }
         #mode-test:checked ~ .toggle-bg { transform: translateX(100%); }
 
-        /* 카드 영역 */
-        .card-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            perspective: 1000px;
-            margin-bottom: 15px;
-            position: relative;
-            min-height: 0;
-        }
+        .flip-hint { text-align: center; font-size: 0.8rem; color: #999; margin-bottom: 10px; height: 15px; }
 
+        .card-wrapper {
+            flex: 1; position: relative; margin-bottom: 15px;
+            perspective: 1000px; cursor: pointer; min-height: 0;
+        }
         .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
+            position: relative; width: 100%; height: 100%;
             transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
             transform-style: preserve-3d;
         }
+        
+        .card-front, .card-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            background: var(--card-bg); border-radius: var(--border-radius);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 20px; box-sizing: border-box;
+            overflow-y: auto; display: flex; flex-direction: column; border: 1px solid #eaeaea;
+        }
+        .card-back {
+            transform: rotateY(180deg); background: #f8fbff; border: 2px solid var(--primary-color);
+        }
 
-        .card-wrapper.test-mode { cursor: pointer; }
         .card-wrapper.test-mode .card-inner.flipped { transform: rotateY(180deg); }
 
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            padding: 20px;
-            box-sizing: border-box;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #eaeaea;
-        }
-
-        .card-back {
-            transform: rotateY(180deg);
-            background: #f8fbff;
-            border: 2px solid var(--primary-color);
-        }
-
-        .card-wrapper.study-mode { overflow-y: auto; }
+        .card-wrapper.study-mode { perspective: none; overflow-y: auto; display: block; }
         .card-wrapper.study-mode .card-inner {
-            transform: none !important;
-            transition: none;
-            transform-style: flat;
-            display: flex;
-            flex-direction: column;
-            height: auto;
-            gap: 12px;
+            transform: none !important; transition: none; transform-style: flat;
+            display: flex; flex-direction: column; height: auto;
         }
-        .card-wrapper.study-mode .card-front,
+        .card-wrapper.study-mode .card-front {
+            position: relative; height: auto; min-height: 150px; backface-visibility: visible;
+        }
         .card-wrapper.study-mode .card-back {
-            position: relative;
-            height: auto;
-            min-height: 150px;
-            backface-visibility: visible;
-            transform: none;
+            position: relative; height: auto; transform: none; display: none;
+            margin-top: 10px; backface-visibility: visible;
         }
+        .card-wrapper.study-mode .card-inner.show-answer .card-back { display: flex; }
 
-        /* 타이포그래피 */
         .tag {
-            display: inline-block;
-            background: #e3f2fd;
-            color: var(--primary-color);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-            align-self: flex-start;
+            display: inline-block; background: #e3f2fd; color: var(--primary-color);
+            padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;
+            font-weight: bold; margin-bottom: 12px; align-self: flex-start;
         }
+        .question-text { font-size: 1.05rem; line-height: 1.5; margin-bottom: 16px; white-space: pre-wrap; }
+        .answer-text { font-size: 1.05rem; line-height: 1.5; font-weight: 600; color: var(--primary-color); margin-bottom: 12px; white-space: pre-wrap; }
+        .explanation-text { font-size: 0.95rem; line-height: 1.5; color: var(--text-light); white-space: pre-wrap; }
 
-        .question-text {
-            font-size: 1.05rem;
-            line-height: 1.5;
-            margin-bottom: 16px;
-            white-space: pre-wrap;
-        }
-
-        .answer-text {
-            font-size: 1.05rem;
-            line-height: 1.5;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 12px;
-            white-space: pre-wrap;
-        }
-
-        .explanation-text {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: var(--text-light);
-            white-space: pre-wrap;
-        }
-
-        /* 하단 컨트롤 */
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0 20px 0;
-            background: var(--bg-color);
-        }
-
+        .controls { display: flex; justify-content: space-between; align-items: center; padding: 10px 0 20px 0; }
         .btn {
-            background: var(--card-bg);
-            border: 1px solid #ddd;
-            color: var(--text-color);
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: all 0.2s;
-            touch-action: manipulation;
+            background: var(--card-bg); border: 1px solid #ddd; color: var(--text-color);
+            padding: 12px 20px; border-radius: 30px; font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.05); touch-action: manipulation;
         }
-
         .btn:active { transform: scale(0.95); background: #f0f0f0; }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        .progress {
-            font-size: 1rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .flip-hint {
-            text-align: center;
-            font-size: 0.8rem;
-            color: #999;
-            margin-bottom: 10px;
-            height: 15px;
-        }
-
-        /* 모달 스타일 */
-        .modal-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            border-radius: inherit;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-content h2 { margin: 0 0 15px 0; font-size: 1.2rem; }
-        .modal-content textarea {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            resize: none;
-            font-family: monospace;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-        
-        .error-msg {
-            color: #e74c3c;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-            display: none;
-        }
-
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .modal-actions button {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        
-        .btn-cancel { background: #eee; color: #333; }
-        .btn-save { background: var(--primary-color); color: white; }
+        .progress { font-size: 1rem; font-weight: bold; color: var(--primary-color); }
     </style>
 </head>
 <body>
@@ -327,16 +115,13 @@
 <div class="app-container">
     <header>
         <div class="header-top">
-            <h1>MC-Con-201 (1~106번)</h1>
-            <button class="btn-import" onclick="openModal()">📥 데이터 불러오기</button>
+            <h1>MC-Con-201 학습 앱</h1>
         </div>
         <div class="mode-toggle">
             <input type="radio" name="mode" id="mode-study" value="study" onchange="changeMode()">
-            <label for="mode-study">📖 학습 모드</label>
-            
+            <label for="mode-study">학습 모드</label>
             <input type="radio" name="mode" id="mode-test" value="test" checked onchange="changeMode()">
-            <label for="mode-test">❓ 테스트 모드</label>
-            
+            <label for="mode-test">테스트 모드</label>
             <div class="toggle-bg"></div>
         </div>
     </header>
@@ -346,61 +131,26 @@
     <div id="card-wrapper" class="card-wrapper test-mode" onclick="flipCard()">
         <div class="card-inner" id="card-inner">
             <div class="card-front">
-                <span class="tag" id="q-number">Q1</span>
-                <div class="question-text" id="front-text">질문 로딩 중...</div>
+                <span class="tag" id="q-number">대기 중</span>
+                <div class="question-text" id="front-text">데이터를 불러오는 중입니다...</div>
             </div>
             <div class="card-back">
                 <span class="tag">정답 및 해설</span>
-                <div class="answer-text" id="back-answer">정답 로딩 중...</div>
-                <div class="explanation-text" id="back-explanation">해설 로딩 중...</div>
+                <div class="answer-text" id="back-answer"></div>
+                <div class="explanation-text" id="back-explanation"></div>
             </div>
         </div>
     </div>
     
     <div class="controls">
         <button class="btn" id="btn-prev" onclick="prevCard()">◀ 이전</button>
-        <div class="progress" id="progress-text">1 / 106</div>
+        <div class="progress" id="progress-text">0 / 0</div>
         <button class="btn" id="btn-next" onclick="nextCard()">다음 ▶</button>
-    </div>
-
-    <!-- 데이터 Import 모달 -->
-    <div class="modal-overlay" id="import-modal">
-        <div class="modal-content">
-            <h2>JSON 데이터 불러오기</h2>
-            <p style="font-size:0.85rem; color:#666; margin-top:0;">팀원들과 공유할 전체 JSON 데이터를 아래에 붙여넣으세요.</p>
-            <textarea id="json-input" placeholder='[{"qNum": 1, "front": "Q...", "answer": "정답: C. Review draft...", "explanation": "..."}]'></textarea>
-            <div class="error-msg" id="error-msg">잘못된 JSON 형식입니다. 데이터를 다시 확인해주세요.</div>
-            <div class="modal-actions">
-                <button class="btn-cancel" onclick="closeModal()">취소</button>
-                <button class="btn-save" onclick="saveData()">적용하기</button>
-            </div>
-        </div>
     </div>
 </div>
 
 <script>
-    // 기본 샘플 데이터 (정답에 보기 원문 포함)
-    let flashcardsData = [
-        {
-            qNum: 1,
-            front: "How to generate a segment matching the campaign brief from Campaign Creation Agent?\n\nA. Create new\nB. Ask Agent in chat\nC. Review draft in Segment Creation",
-            answer: "정답: C. Review draft in Segment Creation",
-            explanation: "Agent가 캠페인 컨텍스트를 바탕으로 이미 세그먼트 초안을 자동 생성하므로, Segment Creation에서 검토 및 수정만 하면 됩니다."
-        },
-        {
-            qNum: 2,
-            front: "Best workflow to use marketing agents to generate campaign, content, and segment?\n\nA. Campaign Creation Agent -> Segment Creation\nB. Custom agent with Prompt Builder\nC. Campaign Agent natively builds all in one prompt",
-            answer: "정답: A. Use the Campaign Creation Agent to generate the campaign record, content, and audience criteria, and then use audience criteria in Segment Creation to build the segment.",
-            explanation: "Campaign Creation Agent로 먼저 생성한 후, 전문화된 Segment Creation 기능으로 실제 세그먼트를 구축하는 것이 표준 워크플로입니다."
-        },
-        {
-            qNum: 3,
-            front: "Regional teams cannot access corporate templates in a central CMS workspace. Why?\n\nA. Need contributor access\nB. Content is related to its BU by default\nC. Not published to CMS",
-            answer: "정답: B. The content in an enhanced CMS workspace is related to its Business Unit by default.",
-            explanation: "CMS 작업 공간 콘텐츠는 기본적으로 해당 Business Unit(BU)에 귀속되어 격리됩니다. (공유하려면 Common Assets 사용)"
-        }
-    ];
-
+    let flashcardsData = [];
     let currentIndex = 0;
     let isStudyMode = false;
     let isFlipped = false;
@@ -415,15 +165,21 @@
     const hintEl = document.getElementById('flip-hint');
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
-    
-    // 모달 관련 요소
-    const modal = document.getElementById('import-modal');
-    const jsonInput = document.getElementById('json-input');
-    const errorMsg = document.getElementById('error-msg');
+
+    // 페이지 로드 시 data.json 파일을 자동으로 불러옵니다.
+    async function loadData() {
+        try {
+            const response = await fetch('data.json');
+            if (!response.ok) throw new Error('네트워크 응답이 정상적이지 않습니다.');
+            flashcardsData = await response.json();
+            updateCard();
+        } catch (error) {
+            frontTextEl.textContent = "데이터를 불러오지 못했습니다. 동일한 경로에 data.json 파일이 있는지 확인해주세요.";
+        }
+    }
 
     function updateCard() {
-        if(flashcardsData.length === 0) return;
-        
+        if (flashcardsData.length === 0) return;
         const card = flashcardsData[currentIndex];
         qNumberEl.textContent = `NO. ${card.qNum || (currentIndex + 1)}`;
         frontTextEl.textContent = card.front;
@@ -435,10 +191,9 @@
         btnPrev.disabled = currentIndex === 0;
         btnNext.disabled = currentIndex === flashcardsData.length - 1;
 
-        if (!isStudyMode && isFlipped) {
-            isFlipped = false;
-            inner.classList.remove('flipped');
-        }
+        isFlipped = false;
+        inner.classList.remove('flipped');
+        inner.classList.remove('show-answer');
     }
 
     function changeMode() {
@@ -446,26 +201,25 @@
         isStudyMode = studyRadio.checked;
         
         if (isStudyMode) {
-            wrapper.classList.remove('test-mode');
-            wrapper.classList.add('study-mode');
-            inner.classList.remove('flipped');
-            hintEl.style.visibility = 'hidden'; 
+            wrapper.classList.replace('test-mode', 'study-mode');
+            hintEl.textContent = "카드 박스를 탭하면 정답이 나타납니다 (좌우 스와이프로 이동)";
         } else {
-            wrapper.classList.remove('study-mode');
-            wrapper.classList.add('test-mode');
-            isFlipped = false;
-            hintEl.style.visibility = 'visible';
+            wrapper.classList.replace('study-mode', 'test-mode');
+            hintEl.textContent = "카드를 탭해서 3D로 뒤집기 (좌우 스와이프로 이동)";
         }
+        isFlipped = false;
+        inner.classList.remove('flipped');
+        inner.classList.remove('show-answer');
         wrapper.scrollTop = 0;
     }
 
     function flipCard() {
-        if (isStudyMode) return;
-        isFlipped = !isFlipped;
-        if (isFlipped) {
-            inner.classList.add('flipped');
+        if (isStudyMode) {
+            inner.classList.toggle('show-answer');
         } else {
-            inner.classList.remove('flipped');
+            isFlipped = !isFlipped;
+            if (isFlipped) inner.classList.add('flipped');
+            else inner.classList.remove('flipped');
         }
     }
 
@@ -473,7 +227,7 @@
         if (currentIndex < flashcardsData.length - 1) {
             currentIndex++;
             updateCard();
-            if(isStudyMode) wrapper.scrollTop = 0;
+            if (isStudyMode) wrapper.scrollTop = 0;
         }
     }
 
@@ -481,75 +235,32 @@
         if (currentIndex > 0) {
             currentIndex--;
             updateCard();
-            if(isStudyMode) wrapper.scrollTop = 0;
-        }
-    }
-
-    /* 모달 처리 (데이터 Import) */
-    function openModal() {
-        modal.style.display = 'flex';
-        errorMsg.style.display = 'none';
-        jsonInput.value = '';
-    }
-
-    function closeModal() {
-        modal.style.display = 'none';
-    }
-
-    function saveData() {
-        try {
-            const parsedData = JSON.parse(jsonInput.value);
-            if(Array.isArray(parsedData) && parsedData.length > 0) {
-                flashcardsData = parsedData;
-                currentIndex = 0;
-                updateCard();
-                closeModal();
-            } else {
-                throw new Error("배열 형식이 아닙니다.");
-            }
-        } catch (e) {
-            errorMsg.style.display = 'block';
+            if (isStudyMode) wrapper.scrollTop = 0;
         }
     }
 
     /* 스와이프 제스처 */
-    let touchstartX = 0;
-    let touchendX = 0;
-
-    wrapper.addEventListener('touchstart', e => {
-        touchstartX = e.changedTouches[0].screenX;
-    }, {passive: true});
-
+    let touchstartX = 0; let touchendX = 0;
+    wrapper.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
     wrapper.addEventListener('touchend', e => {
         touchendX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, {passive: true});
-
-    function handleSwipe() {
         const swipeThreshold = 40;
-        if (touchendX < touchstartX - swipeThreshold) {
-            nextCard(); 
-        }
-        if (touchendX > touchstartX + swipeThreshold) {
-            prevCard(); 
-        }
-    }
+        if (touchendX < touchstartX - swipeThreshold) nextCard(); 
+        if (touchendX > touchstartX + swipeThreshold) prevCard(); 
+    }, {passive: true});
 
     /* 키보드 제어 */
     document.addEventListener('keydown', (e) => {
-        // 모달이 열려있을 때는 키보드 단축키 방지
-        if(modal.style.display === 'flex') return;
-
         if (e.key === 'ArrowRight') nextCard();
         if (e.key === 'ArrowLeft') prevCard();
-        if (e.key === ' ' && !isStudyMode) {
+        if (e.key === ' ') {
             e.preventDefault();
             flipCard();
         }
     });
 
-    // 앱 시작
-    updateCard();
+    // 앱 실행
+    window.onload = loadData;
 </script>
 
 </body>
